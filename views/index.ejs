@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Pixelizr</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='css/materialize.min.css'>
+    <link rel='stylesheet' href='css/styles.css'>
+  </head>
+  <body>
+    <div class='navbar-fixed'>
+      <nav class='indigo'>
+        <div class='nav-wrapper'>
+          <div class='container'>
+            <a href='index.ejs' class='brand-logo center'>
+              <i class='material-icons left'>view_module</i>
+              Image Filter Proof of Concept
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <main class='container'>
+
+      <div class='row'>
+        <div class='col s12 m12'> <!-- holds top row of buttons -->
+
+          <div class='col s12 m6'>
+            <!-- <form>
+              <div class='file-field input-field'>
+                <p class="grey-text">Browse Flickr</p>
+                <div class='clr btn waves-effect waves-light'>
+                  <i class='material-icons right'>search</i>
+                  Find
+                  <input type='button' id='browse-btn' name='action'>
+                </div>
+              </div>
+            </form> -->
+            <form>
+              <div class='col s12 m6'>
+                <p class='grey-text'>Browse Flickr</p>
+                <button id='browse-btn' class='clr btn-large waves-effect waves-light' type='submit' name='action'>
+                  <i class='material-icons right'>search</i>
+                  Find
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class='col s12 m6'>
+            <form>
+              <div class='file-field input-field'>
+                <p class="grey-text">Browse File System</p>
+                 <div class='clr btn waves-effect waves-light'>
+                    <i class='material-icons right'>open_in_browser</i>
+                    Open
+                    <input type='file' accept='image/*' id='file-upload'>
+                 </div>
+                 <!-- <div class='file-path-wrapper'>
+                    <input class='file-path validate' type='text' placeholder='Upload file'>
+                 </div> -->
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <div class='row'> <!-- first row -->
+        <div class='col s12 m6'> <!-- holds the original image canvas -->
+          <p id='show-me' class='b-margin-10'>Original Image</p>
+          <canvas id='origCanvas' class='col s12 m12 no-padding img-select'></canvas>
+        </div>
+
+        <div class='col s12 m6'> <!-- holds the inverted image canvas -->
+          <p id='show-me' class='b-margin-10'>Inverted Image (Negative)</p>
+          <canvas id='invCanvas' class='col s12 m12 no-padding img-select'></canvas>
+        </div>
+
+      </div> <!-- end first row -->
+
+      <div class='row'> <!-- second row -->
+        <div class='col s12 m6'> <!-- holds the grayscale image canvas -->
+          <p id='show-me' class='b-margin-10'>Grayscaled Image</p>
+          <canvas id='grayCanvas' class='col s12 m12 no-padding img-select'></canvas>
+        </div>
+
+        <div class='col s12 m6'> <!-- holds the edge detection canvas -->
+          <p id='show-me' class='b-margin-10'>Blurred Image</p>
+          <canvas id='blurCanvas' class='col s12 m12 no-padding img-select'></canvas>
+        </div>
+      </div> <!-- end second row -->
+    </main>
+
+    <footer class='page-footer indigo lighten-1' id='footer'>
+      <div class='container'>
+        <div class='row footer-row'>
+          <div class='col m6 s12'>
+            <h5 class='grey-text text-lighten-4'>
+              <a class='grey-text text-lighten-4' target='_blank' href='https://github.com/bigrobsf/pixelizr/blob/master/README.md'>
+              <i class='material-icons left'>view_module</i>
+              Image Filter</a>
+            </h5>
+          </div>
+          <!-- <a class='grey-text text-lighten-4' target='_blank' href='https://github.com/bigrobsf/pixelizr/blob/master/README.md'> -->
+           <!-- About</a> -->
+          <div class='col m6 push-l2 s12'>
+            <p class='grey-text text-lighten-4'>
+              Image retrieval courtesy of the
+              <a id='flickr' class='grey-text text-lighten-4' href='https://www.flickr.com/services/api/'>
+                Flickr API
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class='footer-copyright indigo darken-1'>
+        <div class='container'>
+          © 2016 Rob Conner
+        </div>
+      </div>
+    </footer>
+    <script src='js/jquery-2.2.4.min.js'></script>
+    <script src='js/materialize.min.js'></script>
+    <script src='js/show-image.js'></script>
+    <!-- <script src='js/gauss-blur.js'></script> -->
+    <script src='js/do-ajax.js'></script>
+    <script src='js/main.js'></script>
+  </body>
+</html>

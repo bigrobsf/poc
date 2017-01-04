@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixelizr Get Image</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="css/materialize.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="navbar-fixed">
+    <nav class="indigo">
+      <div class="nav-wrapper">
+        <div class="container">
+          <a href="index.ejs" class="brand-logo center">
+            <i class="material-icons left">view_module</i>
+            Pixelizr
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <main class="container">
+    <div class="row"></div>
+
+    <div id="listings" class="row">
+      <div id="preloader" class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>  <!-- end preloader -->
+
+    </div>
+  </main>
+
+  <footer class="page-footer indigo lighten-1" id="footer">
+    <div class="container">
+      <div class="row footer-row">
+        <div class="col l6 s12">
+          <h5 class="grey-text text-lighten-4">
+            <i class="material-icons left">view_module</i>
+            Image Filter
+          </h5>
+        </div>
+        <div class="col l6 push-l2 s12">
+          <p class="grey-text text-lighten-4">
+            Image retrieval courtesy of the
+            <a id="flickr" class="grey-text text-lighten-4" href="https://www.flickr.com/services/api/">
+              Flickr API
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copyright indigo darken-1">
+      <div class="container">
+        © 2016 Rob Conner
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/jquery-2.2.4.min.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/do-ajax.js"></script>
+</body>
+</html>
