@@ -35,18 +35,17 @@ function readFileImage() {
     let imageObj = new Image();
 
     imageObj.onload = function() {
-      canvas.width = imageObj.width;
-      canvas.height = imageObj.height;
-
-      context.drawImage(this, 0, 0);
-
+      context.drawImage(imageObj, 0, 0);
+      
       openImgInCanvas(imageObj.src);
     };
 
     imageObj.src = event.target.result;
   };
 
-  reader.readAsDataURL(this.files[0]);
+  let fileElement = document.getElementById('file-upload');
+
+  reader.readAsDataURL(fileElement.files[0]);
 }
 
 function getElement(id) {

@@ -17,8 +17,9 @@ function openImgInCanvas(imageURL) {
     canvas.height = imageObj.height;
     context.drawImage(this, 0, 0);
     getInvertedColor();
-    // getGrayscale();
+    getGrayscale();
     blurImage();
+    edgeDetect();
 
     document.getElementById('origCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
@@ -26,24 +27,24 @@ function openImgInCanvas(imageURL) {
   };
 
   imageObj.src = imageURL;
-  // return context.canvas.toDataURL('data/jpeg', 1.0);
+  return context.canvas.toDataURL('data/jpeg', 1.0);
 }
 
 
 //==============================================================================
 // create inverted image
 function getInvertedColor() {
-  let imgObj = document.getElementById('origCanvas');
+  let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('invCanvas');
   let context = canvas.getContext('2d');
 
-  let imgW = imgObj.width;
-  let imgH = imgObj.height;
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
   canvas.width = imgW;
   canvas.height = imgH;
 
-  context.drawImage(imgObj, 0, 0);
+  context.drawImage(imageObj, 0, 0);
 
   let imgPixels = context.getImageData(0, 0, imgW, imgH);
 
@@ -64,7 +65,6 @@ function getInvertedColor() {
   context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
 
   document.getElementById('invCanvas').addEventListener('click', function() {
-    console.log('hello');
     window.open(canvas.toDataURL('image/jpeg'), '_blank');
   });
 
@@ -73,19 +73,19 @@ function getInvertedColor() {
 
 
 //==============================================================================
-// create grayscale image
+// create grayscale image for edge detection
 function getGrayscale() {
-  let imgObj = document.getElementById('origCanvas');
+  let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('grayCanvas');
   let context = canvas.getContext('2d');
 
-  let imgW = imgObj.width;
-  let imgH = imgObj.height;
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
   canvas.width = imgW;
   canvas.height = imgH;
 
-  context.drawImage(imgObj, 0, 0);
+  context.drawImage(imageObj, 0, 0);
 
   let imgPixels = context.getImageData(0, 0, imgW, imgH);
 
@@ -112,39 +112,63 @@ function getGrayscale() {
 }
 
 //==============================================================================
-// create blurred image
+// create blurred image for edge detection
 function blurImage() {
-  let img = new Image();
+  let imageObj = document.getElementById('grayCanvas');
 
-  img.onload = function() {
+  let canvas = document.getElementById('blurCanvas');
+  let context = canvas.getContext('2d');
 
-    let imgObj = document.getElementById('grayCanvas');
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
+  canvas.width = imgW;
+  canvas.height = imgH;
 
-    let cvsElement = document.getElementById('blurCanvas');
-    let context = cvsElement.getContext('2d');
+  let blurStrength = '';
 
-    let imgW = imgObj.width;
-    let imgH = imgObj.height;
-    cvsElement.width = imgW;
-    cvsElement.height = imgH;
+  if (imgW > 800 || imgH > 800) {
+    blurStrength = 'blur(3px)';
+  } else {
+    blurStrength = 'blur(1px)';
+  }
 
-    let blurStrength = '';
+  context.filter = blurStrength;
 
-    if (imgW > 800 || imgH > 800) {
-      blurStrength = 'blur(3px)';
-    } else {
-      blurStrength = 'blur(1px)';
-    }
+  context.drawImage(imageObj, 0, 0);
 
-    context.filter = blurStrength;
-    context.drawImage(imgObj, 0, 0);
+  document.getElementById('blurCanvas').addEventListener('click', function() {
+    window.open(canvas.toDataURL('image/jpeg'), '_blank');
+  });
 
-    document.getElementById('blurCanvas').addEventListener('click', function() {
-      window.open(cvsElement.toDataURL('image/jpeg'), '_blank');
-    });
+  return context.canvas.toDataURL('data/jpeg', 1.0);
+}
 
-    // return context.canvas.toDataURL('data/jpeg', 1.0);
-  };
 
-  img.src = getGrayscale();
+//==============================================================================
+// edge detection main function
+function edgeDetect() {
+  let imageObj = document.getElementById('blurCanvas');
+
+  let canvas = document.getElementById('edgeCanvas');
+  let context = canvas.getContext('2d');
+
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
+  canvas.width = imgW;
+  canvas.height = imgH;
+
+  context.drawImage(imageObj, 0, 0);
+
+  let imgPixels = context.getImageData(0, 0, imgW, imgH);
+
+  let edgeDetector = new EdgeDetector(imgPixels, context, imgW, imgH);
+
+  edgeDetector.searchImage();
+  edgeDetector.context.drawImage(canvas, 0, 0);
+
+  document.getElementById('edgeCanvas').addEventListener('click', function() {
+    window.open(canvas.toDataURL('image/jpeg'), '_blank');
+  });
+
+  return context.canvas.toDataURL('data/jpeg', 1.0);
 }

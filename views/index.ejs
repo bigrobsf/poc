@@ -79,7 +79,6 @@
           <p id='show-me' class='b-margin-10'>Inverted Image (Negative)</p>
           <canvas id='invCanvas' class='col s12 m12 no-padding img-select'></canvas>
         </div>
-
       </div> <!-- end first row -->
 
       <div class='row'> <!-- second row -->
@@ -93,6 +92,18 @@
           <canvas id='blurCanvas' class='col s12 m12 no-padding img-select'></canvas>
         </div>
       </div> <!-- end second row -->
+
+      <div class='row'> <!-- third row -->
+        <div class='col s12 m6'> <!-- holds the grayscale image canvas -->
+          <p id='show-me' class='b-margin-10'>Layered Image</p>
+          <canvas id='layerCanvas' class='col s12 m12 no-padding img-select'></canvas>
+        </div>
+
+        <div class='col s12 m6'> <!-- holds the edge detection canvas -->
+          <p id='show-me' class='b-margin-10'>Edge Detection</p>
+          <canvas id='edgeCanvas' class='col s12 m12 no-padding img-select'></canvas>
+        </div>
+      </div> <!-- end third row -->
     </main>
 
     <footer class='page-footer indigo lighten-1' id='footer'>
@@ -127,7 +138,7 @@
     <script src='js/jquery-2.2.4.min.js'></script>
     <script src='js/materialize.min.js'></script>
     <script src='js/show-image.js'></script>
-    <!-- <script src='js/gauss-blur.js'></script> -->
+    <script src='js/edge-detect.js'></script>
     <script src='js/do-ajax.js'></script>
     <script src='js/main.js'></script>
   </body>
