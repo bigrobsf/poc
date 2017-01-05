@@ -73,11 +73,6 @@ canvas {
   height: 98%;
 }
 
-/*.image {
-  height: 380px;
-  max-width: 100%;
-}*/
-
 /*
   ==============================================================
   footer
@@ -105,5 +100,9 @@ canvas {
 
 .img-select:hover {
   border: 2px solid #CCC;
+  cursor: pointer;
+}
+
+.img-save:hover {
   cursor: pointer;
 }

@@ -19,13 +19,17 @@ function openImgInCanvas(imageURL) {
     invertColor();
     grayscale();
     blurImage();
-    edgeDetect(5);
-    pixelize(50);
+    edgeDetect(20);
+    pixelize(10);
     adjBrightness(100);
 
     document.getElementById('origCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
     });
+
+    document.getElementById('dl-original').addEventListener('click', function() {
+      this.href = canvas.toDataURL('image/jpeg');
+    }, false);
   };
 
   imageObj.src = imageURL;
@@ -70,6 +74,10 @@ function invertColor() {
     window.open(canvas.toDataURL('image/jpeg'), '_blank');
   });
 
+  document.getElementById('dl-inverted').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
+
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
 
@@ -110,6 +118,10 @@ function grayscale() {
     window.open(canvas.toDataURL('image/jpeg'), '_blank');
   });
 
+  document.getElementById('dl-grayscale').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
+
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
 
@@ -142,6 +154,10 @@ function blurImage() {
   document.getElementById('blurCanvas').addEventListener('click', function() {
     window.open(canvas.toDataURL('image/jpeg'), '_blank');
   });
+
+  document.getElementById('dl-blurred').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
@@ -182,10 +198,18 @@ function edgeDetect(threshold = 10) {
     window.open(layerCvs.toDataURL('image/jpeg'), '_blank');
   });
 
+  document.getElementById('dl-layered').addEventListener('click', function() {
+    this.href = layerCvs.toDataURL('image/jpeg');
+  }, false);
+
   // png encoding to make image viewable in new window
   document.getElementById('edgeCanvas').addEventListener('click', function() {
     window.open(edgeCvs.toDataURL('image/png'), '_blank');
   });
+
+  document.getElementById('dl-edges').addEventListener('click', function() {
+    this.href = edgeCvs.toDataURL('image/png');
+  }, false);
 
   return edgeDetector.edgeCtx.canvas.toDataURL('data/png', 1.0);
 }
@@ -211,6 +235,10 @@ function pixelize(blockSize = 10) {
   document.getElementById('pxlCanvas').addEventListener('click', function() {
     window.open(canvas.toDataURL('image/jpeg'), '_blank');
   });
+
+  document.getElementById('dl-pixelated').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
@@ -247,6 +275,10 @@ function adjBrightness(adjustment = 50) {
   document.getElementById('brightCanvas').addEventListener('click', function() {
     window.open(canvas.toDataURL('image/jpeg'), '_blank');
   });
+
+  document.getElementById('dl-brightness').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }

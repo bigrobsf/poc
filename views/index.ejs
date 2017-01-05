@@ -69,53 +69,57 @@
         </div>
       </div>
 
-      <div class='row'> <!-- first row -->
-        <div class='col s12 m6'> <!-- holds the original image canvas -->
+      <div class='row'> <!-- start row -->
+        <div class='col s12 m6 l3'> <!-- holds the original image canvas -->
           <p id='show-me' class='b-margin-10'>Original Image</p>
           <canvas id='origCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-original' class='img-save' download='original.jpg'>Save Image</a>
         </div>
 
-        <div class='col s12 m6'> <!-- holds the inverted image canvas -->
+        <div class='col s12 m6 l3'> <!-- holds the inverted image canvas -->
           <p id='show-me' class='b-margin-10'>Inverted Image (Negative)</p>
           <canvas id='invCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-inverted' class='img-save' download='inverted.jpg'>Save Image</a>
         </div>
-      </div> <!-- end first row -->
 
-      <div class='row'> <!-- second row -->
-        <div class='col s12 m6'> <!-- holds the grayscale image canvas -->
+        <div class='col s12 m6 l3'> <!-- holds the grayscale image canvas -->
           <p id='show-me' class='b-margin-10'>Grayscaled Image</p>
           <canvas id='grayCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-grayscale' class='img-save' download='grayscale.jpg'>Save Image</a>
         </div>
 
-        <div class='col s12 m6'> <!-- holds the edge detection canvas -->
+        <div class='col s12 m6 l3'> <!-- holds the edge detection canvas -->
           <p id='show-me' class='b-margin-10'>Blurred Image</p>
           <canvas id='blurCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-blurred' class='img-save' download='blurred.jpg'>Save Image</a>
         </div>
-      </div> <!-- end second row -->
+      </div> <!-- end row -->
 
-      <div class='row'> <!-- third row -->
-        <div class='col s12 m6'> <!-- holds the pixelized image canvas -->
+      <div class='row'> <!-- start row -->
+        <div class='col s12 m6 l3'> <!-- holds the pixelized image canvas -->
           <p id='show-me' class='b-margin-10'>Pixelized Image</p>
           <canvas id='pxlCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-pixelated' class='img-save' download='pixelated.jpg'>Save Image</a>
         </div>
 
-        <div class='col s12 m6'> <!-- holds the tbd canvas -->
+        <div class='col s12 m6 l3'> <!-- holds the tbd canvas -->
           <p id='show-me' class='b-margin-10'>Adjust Brightness</p>
           <canvas id='brightCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-brightness' class='img-save' download='brightness.jpg'>Save Image</a>
         </div>
-      </div> <!-- end third row -->
 
-      <div class='row'> <!-- fourth row -->
-        <div class='col s12 m6'> <!-- holds the grayscale image canvas -->
+        <div class='col s12 m6 l3'> <!-- holds the grayscale image canvas -->
           <p id='show-me' class='b-margin-10'>Layered Image</p>
           <canvas id='layerCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-layered' class='img-save' download='layered.jpg'>Save Image</a>
         </div>
 
-        <div class='col s12 m6'> <!-- holds the edge detection canvas -->
+        <div class='col s12 m6 l3'> <!-- holds the edge detection canvas -->
           <p id='show-me' class='b-margin-10'>Edge Detection</p>
           <canvas id='edgeCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-edges' class='img-save' download='edges.jpg'>Save Image</a>
         </div>
-      </div> <!-- end fourth row -->
+      </div> <!-- end row -->
     </main>
 
     <footer class='page-footer indigo lighten-1' id='footer'>
@@ -143,7 +147,7 @@
 
       <div class='footer-copyright indigo darken-1'>
         <div class='container'>
-          © 2016 Rob Conner
+          © 2017 Rob Conner
         </div>
       </div>
     </footer>

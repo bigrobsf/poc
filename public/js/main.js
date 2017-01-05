@@ -15,6 +15,8 @@ window.onload = function main() {
   getFlickrImg();
 };
 
+//==============================================================================
+// opens image in URL bar
 function getFlickrImg() {
   let url = window.location.search.split('=');
 
@@ -25,6 +27,8 @@ function getFlickrImg() {
   }
 }
 
+//==============================================================================
+// open image from file system
 function readFileImage() {
   let canvas = document.getElementById('origCanvas');
   let context = canvas.getContext('2d');
@@ -36,7 +40,7 @@ function readFileImage() {
 
     imageObj.onload = function() {
       context.drawImage(imageObj, 0, 0);
-      
+
       openImgInCanvas(imageObj.src);
     };
 
