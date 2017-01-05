@@ -19,8 +19,9 @@ function openImgInCanvas(imageURL) {
     invertColor();
     grayscale();
     blurImage();
-    edgeDetect();
-    pixelize();
+    edgeDetect(5);
+    pixelize(50);
+    adjBrightness(100);
 
     document.getElementById('origCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
@@ -149,7 +150,7 @@ function blurImage() {
 //==============================================================================
 // edge detection main function - creates two canvases, one that is 'layered'
 // and one that is just a plot of the edges
-function edgeDetect() {
+function edgeDetect(threshold = 10) {
   let imageObj = document.getElementById('blurCanvas');
 
   let layerCvs = document.getElementById('layerCanvas');
@@ -171,7 +172,7 @@ function edgeDetect() {
 
   let imgPixels = layerCtx.getImageData(0, 0, imgW, imgH);
 
-  let edgeDetector = new EdgeDetector(imgPixels, layerCtx, edgeCtx, imgW, imgH);
+  let edgeDetector = new EdgeDetector(imgPixels, layerCtx, edgeCtx, imgW, imgH, threshold);
   edgeDetector.searchImage();
 
   edgeDetector.layerCtx.drawImage(layerCvs, 0, 0);
@@ -191,7 +192,7 @@ function edgeDetect() {
 
 //==============================================================================
 // main function for pixelized image
-function pixelize() {
+function pixelize(blockSize = 10) {
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('pxlCanvas');
@@ -205,9 +206,45 @@ function pixelize() {
   context.drawImage(imageObj, 0, 0);
 
   let imgPixels = context.getImageData(0, 0, imgW, imgH);
-  renderPixelImg(context, imgW, imgH);
+  renderPixelImg(context, imgW, imgH, blockSize);
 
   document.getElementById('pxlCanvas').addEventListener('click', function() {
+    window.open(canvas.toDataURL('image/jpeg'), '_blank');
+  });
+
+  return context.canvas.toDataURL('data/jpeg', 1.0);
+}
+
+//==============================================================================
+// change brightness of image
+function adjBrightness(adjustment = 50) {
+  let imageObj = document.getElementById('origCanvas');
+
+  let canvas = document.getElementById('brightCanvas');
+  let context = canvas.getContext('2d');
+
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
+  canvas.width = imgW;
+  canvas.height = imgH;
+
+  context.drawImage(imageObj, 0, 0);
+
+  let imgPixels = context.getImageData(0, 0, imgW, imgH);
+
+  for (let y = 0; y < imgPixels.height; y++) {
+    for (let x = 0; x < imgPixels.width; x++) {
+      let i = (y * 4) * imgPixels.width + x * 4;
+
+      imgPixels.data[i] += adjustment;
+      imgPixels.data[i + 1] += adjustment;
+      imgPixels.data[i + 2] += adjustment;
+    }
+  }
+
+  context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+
+  document.getElementById('brightCanvas').addEventListener('click', function() {
     window.open(canvas.toDataURL('image/jpeg'), '_blank');
   });
 

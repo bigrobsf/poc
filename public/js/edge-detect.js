@@ -13,7 +13,7 @@ let EdgeDetector = function(imgPixels, layerCtx, edgeCtx, imgW, imgH, threshold)
   this.edgeCtx = edgeCtx;
   this.imgW = imgW;
   this.imgH = imgH;
-  this.threshold = threshold || 10;
+  this.threshold = threshold;
 };
 
 // =============================================================================

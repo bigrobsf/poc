@@ -5,10 +5,9 @@
 
 //==============================================================================
 // iterates through all blocks of the calculated number of pixels and draws them
-function renderPixelImg(ctx, width, height) {
+function renderPixelImg(ctx, width, height, blockSize) {
   let avgBlockColor = '';
   let numBlocks = 0;
-  let blockSize = 10;
   let numRows = 0;
   let numCols = 0;
 
