@@ -111,6 +111,7 @@ function getGrayscale() {
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
 
+
 //==============================================================================
 // create blurred image for edge detection
 function blurImage() {
@@ -126,8 +127,8 @@ function blurImage() {
 
   let blurStrength = '';
 
-  if (imgW > 800 || imgH > 800) {
-    blurStrength = 'blur(3px)';
+  if (imgW > 600 || imgH > 600) {
+    blurStrength = 'blur(2px)';
   } else {
     blurStrength = 'blur(1px)';
   }
@@ -149,26 +150,39 @@ function blurImage() {
 function edgeDetect() {
   let imageObj = document.getElementById('blurCanvas');
 
-  let canvas = document.getElementById('edgeCanvas');
-  let context = canvas.getContext('2d');
+  let layerCvs = document.getElementById('layerCanvas');
+  let layerCtx = layerCvs.getContext('2d');
+
+  let edgeCvs = document.getElementById('edgeCanvas');
+  let edgeCtx = edgeCvs.getContext('2d');
 
   let imgW = imageObj.width;
   let imgH = imageObj.height;
-  canvas.width = imgW;
-  canvas.height = imgH;
 
-  context.drawImage(imageObj, 0, 0);
+  layerCvs.width = imgW;
+  layerCvs.height = imgH;
 
-  let imgPixels = context.getImageData(0, 0, imgW, imgH);
+  edgeCvs.width = imgW;
+  edgeCvs.height = imgH;
 
-  let edgeDetector = new EdgeDetector(imgPixels, context, imgW, imgH);
+  layerCtx.drawImage(imageObj, 0, 0);
 
+  let imgPixels = layerCtx.getImageData(0, 0, imgW, imgH);
+
+  let edgeDetector = new EdgeDetector(imgPixels, layerCtx, edgeCtx, imgW, imgH);
   edgeDetector.searchImage();
-  edgeDetector.context.drawImage(canvas, 0, 0);
 
-  document.getElementById('edgeCanvas').addEventListener('click', function() {
-    window.open(canvas.toDataURL('image/jpeg'), '_blank');
+  edgeDetector.layerCtx.drawImage(layerCvs, 0, 0);
+  edgeDetector.edgeCtx.drawImage(edgeCvs, 0, 0);
+
+  document.getElementById('layerCanvas').addEventListener('click', function() {
+    window.open(layerCvs.toDataURL('image/jpeg'), '_blank');
   });
 
-  return context.canvas.toDataURL('data/jpeg', 1.0);
+  // png encoding to make image viewable in new window
+  document.getElementById('edgeCanvas').addEventListener('click', function() {
+    window.open(edgeCvs.toDataURL('image/png'), '_blank');
+  });
+
+  return edgeDetector.edgeCtx.canvas.toDataURL('data/png', 1.0);
 }

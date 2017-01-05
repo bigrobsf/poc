@@ -60,7 +60,7 @@
 
     // The object we use to start the AJAX request using JQuery's format
     let requestObject = {
-      url: `https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=5b7fd66b51d24258c6135f2647adfb3f&extras=url_q,url_h&per_page=30&format=json&nojsoncallback=1`,
+      url: `https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=5b7fd66b51d24258c6135f2647adfb3f&extras=url_q,url_c&per_page=30&format=json&nojsoncallback=1`,
       method: "GET",
       success: handleSuccess,
       error: handleError
@@ -89,14 +89,14 @@
     };
 
     for (let i = 0; i < imageArray.length; i++) {
-      let imageElement = new PhotoImage (imageArray[i].id, imageArray[i].height_h,
-        imageArray[i].width_h, imageArray[i].owner,
+      let imageElement = new PhotoImage (imageArray[i].id, imageArray[i].height_c,
+        imageArray[i].width_c, imageArray[i].owner,
         imageArray[i].title, imageArray[i].server, imageArray[i].farm,
-        imageArray[i].secret, imageArray[i].url_q, imageArray[i].url_h);
+        imageArray[i].secret, imageArray[i].url_q, imageArray[i].url_c);
 
       console.log(imageElement);
 
-      if (imageArray[i].height_h > 0 || imageArray[i].width_h > 0) {
+      if (imageArray[i].height_c > 0 || imageArray[i].width_c > 0) {
         images.push(imageElement);
       }
     }
