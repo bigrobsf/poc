@@ -16,10 +16,11 @@ function openImgInCanvas(imageURL) {
     canvas.width = imageObj.width;
     canvas.height = imageObj.height;
     context.drawImage(this, 0, 0);
-    getInvertedColor();
-    getGrayscale();
+    invertColor();
+    grayscale();
     blurImage();
     edgeDetect();
+    pixelize();
 
     document.getElementById('origCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
@@ -33,7 +34,7 @@ function openImgInCanvas(imageURL) {
 
 //==============================================================================
 // create inverted image
-function getInvertedColor() {
+function invertColor() {
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('invCanvas');
@@ -74,7 +75,7 @@ function getInvertedColor() {
 
 //==============================================================================
 // create grayscale image for edge detection
-function getGrayscale() {
+function grayscale() {
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('grayCanvas');
@@ -146,7 +147,8 @@ function blurImage() {
 
 
 //==============================================================================
-// edge detection main function
+// edge detection main function - creates two canvases, one that is 'layered'
+// and one that is just a plot of the edges
 function edgeDetect() {
   let imageObj = document.getElementById('blurCanvas');
 
@@ -185,4 +187,29 @@ function edgeDetect() {
   });
 
   return edgeDetector.edgeCtx.canvas.toDataURL('data/png', 1.0);
+}
+
+//==============================================================================
+// main function for pixelized image
+function pixelize() {
+  let imageObj = document.getElementById('origCanvas');
+
+  let canvas = document.getElementById('pxlCanvas');
+  let context = canvas.getContext('2d');
+
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
+  canvas.width = imgW;
+  canvas.height = imgH;
+
+  context.drawImage(imageObj, 0, 0);
+
+  let imgPixels = context.getImageData(0, 0, imgW, imgH);
+  renderPixelImg(context, imgW, imgH);
+
+  document.getElementById('pxlCanvas').addEventListener('click', function() {
+    window.open(canvas.toDataURL('image/jpeg'), '_blank');
+  });
+
+  return context.canvas.toDataURL('data/jpeg', 1.0);
 }

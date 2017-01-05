@@ -94,6 +94,18 @@
       </div> <!-- end second row -->
 
       <div class='row'> <!-- third row -->
+        <div class='col s12 m6'> <!-- holds the pixelized image canvas -->
+          <p id='show-me' class='b-margin-10'>Pixelized Image</p>
+          <canvas id='pxlCanvas' class='col s12 m12 no-padding img-select'></canvas>
+        </div>
+
+        <div class='col s12 m6'> <!-- holds the tbd canvas -->
+          <p id='show-me' class='b-margin-10'>TBD</p>
+          <canvas id='tbdCanvas' class='col s12 m12 no-padding img-select'></canvas>
+        </div>
+      </div> <!-- end third row -->
+
+      <div class='row'> <!-- fourth row -->
         <div class='col s12 m6'> <!-- holds the grayscale image canvas -->
           <p id='show-me' class='b-margin-10'>Layered Image</p>
           <canvas id='layerCanvas' class='col s12 m12 no-padding img-select'></canvas>
@@ -103,7 +115,7 @@
           <p id='show-me' class='b-margin-10'>Edge Detection</p>
           <canvas id='edgeCanvas' class='col s12 m12 no-padding img-select'></canvas>
         </div>
-      </div> <!-- end third row -->
+      </div> <!-- end fourth row -->
     </main>
 
     <footer class='page-footer indigo lighten-1' id='footer'>
@@ -139,6 +151,7 @@
     <script src='js/materialize.min.js'></script>
     <script src='js/show-image.js'></script>
     <script src='js/edge-detect.js'></script>
+    <script src='js/pixelize.js'></script>
     <script src='js/do-ajax.js'></script>
     <script src='js/main.js'></script>
   </body>
