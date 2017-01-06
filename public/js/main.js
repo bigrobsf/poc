@@ -16,7 +16,7 @@ window.onload = function main() {
 };
 
 //==============================================================================
-// opens image in URL bar
+// open image in URL bar
 function getFlickrImg() {
   let url = window.location.search.split('=');
 

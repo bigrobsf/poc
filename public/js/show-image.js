@@ -19,9 +19,9 @@ function openImgInCanvas(imageURL) {
     invertColor();
     grayscale();
     blurImage();
-    edgeDetect(20);
-    pixelize(10);
-    adjBrightness(100);
+    edgeDetect();
+    pixelize();
+    adjBrightness();
 
     document.getElementById('origCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
@@ -166,7 +166,9 @@ function blurImage() {
 //==============================================================================
 // edge detection main function - creates two canvases, one that is 'layered'
 // and one that is just a plot of the edges
-function edgeDetect(threshold = 10) {
+function edgeDetect(threshold = 10, listener = false) {
+  threshold = threshold < 5 ? 5 : threshold;
+
   let imageObj = document.getElementById('blurCanvas');
 
   let layerCvs = document.getElementById('layerCanvas');
@@ -194,9 +196,13 @@ function edgeDetect(threshold = 10) {
   edgeDetector.layerCtx.drawImage(layerCvs, 0, 0);
   edgeDetector.edgeCtx.drawImage(edgeCvs, 0, 0);
 
-  document.getElementById('layerCanvas').addEventListener('click', function() {
-    window.open(layerCvs.toDataURL('image/jpeg'), '_blank');
-  });
+  if (listener === false) {
+    document.getElementById('layerCanvas').addEventListener('click', function() {
+      window.open(layerCvs.toDataURL('image/jpeg'), '_blank');
+    });
+
+    listener = true;
+  }
 
   document.getElementById('dl-layered').addEventListener('click', function() {
     this.href = layerCvs.toDataURL('image/jpeg');
@@ -211,12 +217,23 @@ function edgeDetect(threshold = 10) {
     this.href = edgeCvs.toDataURL('image/png');
   }, false);
 
+  var edgeForm = document.getElementById('edge-form');
+  edgeForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    let threshold = document.getElementById('threshold').value;
+    threshold = Number(threshold);
+
+    edgeDetect(threshold, listener);
+  });
+
   return edgeDetector.edgeCtx.canvas.toDataURL('data/png', 1.0);
 }
 
 //==============================================================================
 // main function for pixelized image
-function pixelize(blockSize = 10) {
+function pixelize(blockSize = 20, listener = false) {
+  blockSize = blockSize < 10 ? 10 : blockSize;
+
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('pxlCanvas');
@@ -232,20 +249,34 @@ function pixelize(blockSize = 10) {
   let imgPixels = context.getImageData(0, 0, imgW, imgH);
   renderPixelImg(context, imgW, imgH, blockSize);
 
-  document.getElementById('pxlCanvas').addEventListener('click', function() {
-    window.open(canvas.toDataURL('image/jpeg'), '_blank');
-  });
+  if (listener === false) {
+    document.getElementById('pxlCanvas').addEventListener('click', function() {
+      window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+
+    listener = true;
+  }
 
   document.getElementById('dl-pixelated').addEventListener('click', function() {
     this.href = canvas.toDataURL('image/jpeg');
   }, false);
+
+  var pxlForm = document.getElementById('blocksize-form');
+
+  pxlForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    let blockSize = document.getElementById('block-size').value;
+    blockSize = Number(blockSize);
+
+    pixelize(blockSize, listener);
+  });
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
 
 //==============================================================================
 // change brightness of image
-function adjBrightness(adjustment = 50) {
+function adjBrightness(adjustment = 30, listener = false) {
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('brightCanvas');
@@ -272,13 +303,26 @@ function adjBrightness(adjustment = 50) {
 
   context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
 
-  document.getElementById('brightCanvas').addEventListener('click', function() {
-    window.open(canvas.toDataURL('image/jpeg'), '_blank');
-  });
+  if (listener === false) {
+    document.getElementById('brightCanvas').addEventListener('click', function() {
+      window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+    listener = true;
+  }
 
   document.getElementById('dl-brightness').addEventListener('click', function() {
     this.href = canvas.toDataURL('image/jpeg');
   }, false);
+
+  var brightForm = document.getElementById('brightness-form');
+
+  brightForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    let brightness = document.getElementById('brightness').value;
+    brightness = Number(brightness);
+
+    adjBrightness(brightness, listener);
+  });
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }

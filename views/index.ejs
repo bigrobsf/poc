@@ -29,16 +29,6 @@
         <div class='col s12 m12'> <!-- holds top row of buttons -->
 
           <div class='col s12 m6'>
-            <!-- <form>
-              <div class='file-field input-field'>
-                <p class="grey-text">Browse Flickr</p>
-                <div class='clr btn waves-effect waves-light'>
-                  <i class='material-icons right'>search</i>
-                  Find
-                  <input type='button' id='browse-btn' name='action'>
-                </div>
-              </div>
-            </form> -->
             <form>
               <div class='col s12 m6'>
                 <p class='grey-text'>Browse Flickr</p>
@@ -53,7 +43,7 @@
           <div class='col s12 m6'>
             <form>
               <div class='file-field input-field'>
-                <p class="grey-text">Browse File System</p>
+                <p class='grey-text'>Browse File System</p>
                  <div class='clr btn waves-effect waves-light'>
                     <i class='material-icons right'>open_in_browser</i>
                     Open
@@ -100,12 +90,26 @@
           <p id='show-me' class='b-margin-10'>Pixelized Image</p>
           <canvas id='pxlCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-pixelated' class='img-save' download='pixelated.jpg'>Save Image</a>
+          <form id='blocksize-form'>
+            <div>
+              <div class='input-field'>
+                Block Size: <input type='text' placeholder='20' id='block-size' name='block-size'>
+              </div>
+            </div>
+          </form>
         </div>
 
         <div class='col s12 m6 l3'> <!-- holds the tbd canvas -->
           <p id='show-me' class='b-margin-10'>Adjust Brightness</p>
           <canvas id='brightCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-brightness' class='img-save' download='brightness.jpg'>Save Image</a>
+          <form id='brightness-form'>
+            <div>
+              <div class='input-field'>
+                Brightness: <input type='text' placeholder='30' id='brightness' name='brightness'>
+              </div>
+            </div>
+          </form>
         </div>
 
         <div class='col s12 m6 l3'> <!-- holds the grayscale image canvas -->
@@ -118,6 +122,13 @@
           <p id='show-me' class='b-margin-10'>Edge Detection</p>
           <canvas id='edgeCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-edges' class='img-save' download='edges.jpg'>Save Image</a>
+          <form id='edge-form'>
+            <div>
+              <div class='input-field'>
+                Threshold: <input type='text' placeholder='10' id='threshold' name='threshold'>
+              </div>
+            </div>
+          </form>
         </div>
       </div> <!-- end row -->
     </main>
