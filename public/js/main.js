@@ -66,7 +66,7 @@ function readURL() {
   urlString.addEventListener('submit', function (event) {
     event.preventDefault();
     let directURL = document.getElementById('url').value;
-    console.log(directURL);
+
     openImgInCanvas(directURL);
   });
 }

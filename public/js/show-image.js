@@ -196,9 +196,19 @@ function edgeDetect(threshold = 10, listener = false) {
   edgeDetector.layerCtx.drawImage(layerCvs, 0, 0);
   edgeDetector.edgeCtx.drawImage(edgeCvs, 0, 0);
 
+  let rangeInput = document.getElementById('threshold');
+
   if (listener === false) {
     document.getElementById('layerCanvas').addEventListener('click', function() {
       window.open(layerCvs.toDataURL('image/jpeg'), '_blank');
+    });
+
+    rangeInput.addEventListener('change', function() {
+      document.getElementById('threshold').textContent = rangeInput.value;
+      threshold = rangeInput.value;
+      console.log(threshold);
+
+      edgeDetect(threshold, listener);
     });
 
     listener = true;
@@ -217,33 +227,13 @@ function edgeDetect(threshold = 10, listener = false) {
     this.href = edgeCvs.toDataURL('image/png');
   }, false);
 
-  // var edgeForm = document.getElementById('edge-form');
-  // edgeForm.addEventListener('submit', function (event) {
-  //   event.preventDefault();
-  //   let threshold = document.getElementById('threshold').value;
-  //   threshold = Number(threshold);
-  //
-  //   edgeDetect(threshold, listener);
-  // });
-  let rangeInput = document.getElementById('threshold');
-
-  rangeInput.addEventListener('change', function() {
-    document.getElementById('threshold').textContent = rangeInput.value;
-    threshold = rangeInput.value;
-    console.log(threshold);
-
-    edgeDetect(threshold, listener);
-  });
-
-
   return edgeDetector.edgeCtx.canvas.toDataURL('data/png', 1.0);
 }
 
 //==============================================================================
 // main function for pixelized image
 function pixelize(blockSize = 20, listener = false) {
-  blockSize = blockSize < 10 ? 10 : blockSize;
-
+  console.log('blockSize function start:', blockSize);
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('pxlCanvas');
@@ -259,9 +249,18 @@ function pixelize(blockSize = 20, listener = false) {
   let imgPixels = context.getImageData(0, 0, imgW, imgH);
   renderPixelImg(context, imgW, imgH, blockSize);
 
+  let rangeInput = document.getElementById('block-size');
+
   if (listener === false) {
     document.getElementById('pxlCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+
+    rangeInput.addEventListener('change', function() {
+      document.getElementById('block-size').textContent = rangeInput.value;
+      blockSize = rangeInput.value;
+
+      pixelize(blockSize, listener);
     });
 
     listener = true;
@@ -270,16 +269,6 @@ function pixelize(blockSize = 20, listener = false) {
   document.getElementById('dl-pixelated').addEventListener('click', function() {
     this.href = canvas.toDataURL('image/jpeg');
   }, false);
-
-  let rangeInput = document.getElementById('block-size');
-
-  rangeInput.addEventListener('change', function() {
-    document.getElementById('block-size').textContent = rangeInput.value;
-    blockSize = rangeInput.value;
-    console.log(blockSize);
-
-    pixelize(blockSize, listener);
-  });
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
@@ -308,6 +297,7 @@ function adjBrightness(adjustment = 30, listener = false) {
       imgPixels.data[i] += adjustment;
       imgPixels.data[i + 1] += adjustment;
       imgPixels.data[i + 2] += adjustment;
+      if (x === 40 && y === 40) console.log(adjustment, imgPixels.data[i], imgPixels.data[i+1], imgPixels.data[i+2]);
     }
   }
 
@@ -317,6 +307,7 @@ function adjBrightness(adjustment = 30, listener = false) {
     document.getElementById('brightCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
     });
+
     listener = true;
   }
 
@@ -324,7 +315,7 @@ function adjBrightness(adjustment = 30, listener = false) {
     this.href = canvas.toDataURL('image/jpeg');
   }, false);
 
-  var brightForm = document.getElementById('brightness-form');
+  let brightForm = document.getElementById('brightness-form');
 
   brightForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -333,6 +324,16 @@ function adjBrightness(adjustment = 30, listener = false) {
 
     adjBrightness(brightness, listener);
   });
+
+  // let rangeInput = document.getElementById('brightness');
+  //
+  // rangeInput.addEventListener('change', function() {
+  //   document.getElementById('brightness').textContent = rangeInput.value;
+  //   adjustment = rangeInput.value;
+  //   console.log('adjustment: ', adjustment, rangeInput.value);
+  //
+  //   adjBrightness(adjustment, listener);
+  // });
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
