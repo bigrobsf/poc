@@ -23,6 +23,7 @@ function openImgInCanvas(imageURL) {
     pixelize();
     adjBrightness();
     adjAlpha();
+    adjColor();
 
     document.getElementById('origCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
@@ -326,6 +327,78 @@ function adjBrightness(adjustment = 30, listener = false) {
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
+
+
+//==============================================================================
+// change brightness of image
+function adjColor(red = 0, green = 0, blue = 0, listener = false) {
+  let imageObj = document.getElementById('origCanvas');
+
+  let canvas = document.getElementById('clrCanvas');
+  let context = canvas.getContext('2d');
+
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
+  canvas.width = imgW;
+  canvas.height = imgH;
+
+  context.drawImage(imageObj, 0, 0);
+
+  let imgPixels = context.getImageData(0, 0, imgW, imgH);
+
+  for (let y = 0; y < imgPixels.height; y++) {
+    for (let x = 0; x < imgPixels.width; x++) {
+      let i = (y * 4) * imgPixels.width + x * 4;
+
+      imgPixels.data[i] += red;
+      imgPixels.data[i + 1] += green;
+      imgPixels.data[i + 2] += blue;
+    }
+  }
+
+  context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+
+  let redInput = document.getElementById('red-adj');
+  let greenInput = document.getElementById('green-adj');
+  let blueInput = document.getElementById('blue-adj');
+
+  if (listener === false) {
+    document.getElementById('clrCanvas').addEventListener('click', function() {
+      window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+
+    redInput.addEventListener('change', function() {
+      document.getElementById('red-adj').textContent = redInput.value;
+      red = Number(redInput.value);
+
+      adjColor(red, green, blue, listener);
+    });
+
+    greenInput.addEventListener('change', function() {
+      document.getElementById('green-adj').textContent = greenInput.value;
+      green = Number(greenInput.value);
+
+      adjColor(red, green, blue, listener);
+    });
+
+    blueInput.addEventListener('change', function() {
+      document.getElementById('blue-adj').textContent = blueInput.value;
+      blue = Number(blueInput.value);
+
+      adjColor(red, green, blue, listener);
+    });
+
+    listener = true;
+  }
+
+  document.getElementById('dl-color').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
+
+  return context.canvas.toDataURL('data/jpeg', 1.0);
+}
+
+
 
 //==============================================================================
 // change transparency of image
