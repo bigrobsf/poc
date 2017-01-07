@@ -144,6 +144,45 @@
 
         </div>
       </div> <!-- end row -->
+
+      <div class='row'> <!-- start row -->
+        <div class='col s12 m6 l3'> <!-- color channel canvas -->
+          <p id='show-me' class='b-margin-10'>Color Channels</p>
+          <canvas id='clrCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-color' class='img-save' download='clrchannel.jpg'>Save Image</a>
+
+          <form action='#'>
+            <p class='range-field'>Red:
+              <input type='range' id='red-adj' min='-255' value='0' max='255' />
+            </p>
+            <p class='range-field'>Green:
+              <input type='range' id='green-adj' min='-255' value='0' max='255' />
+            </p>
+            <p class='range-field'>Blue:
+              <input type='range' id='blue-adj' min='-255' value='0' max='255' />
+            </p>
+          </form>
+        </div>
+
+        <div class='col s12 m6 l3'> <!-- holds the alpha channel canvas -->
+          <p id='show-me' class='b-margin-10'>Alpha Channel</p>
+          <canvas id='alphaCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-alpha' class='img-save' download='alpha.jpg'>Save Image</a>
+
+          <form action='#'>
+            <p class='range-field'>Transparency:
+              <input type='range' id='alpha' min='0' value='125' max='255' />
+            </p>
+          </form>
+
+        </div>
+
+        <div class='col s12 m6 l3'> <!-- TBD -->
+        </div>
+
+        <div class='col s12 m6 l3'> <!-- TBD -->
+        </div>
+      </div> <!-- end row -->
     </main>
 
     <footer class='page-footer indigo lighten-1' id='footer'>
