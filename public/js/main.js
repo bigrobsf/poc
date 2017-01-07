@@ -57,3 +57,18 @@ function getElement(id) {
 }
 
 getElement('file-upload').addEventListener('change', readFileImage, false);
+
+//==============================================================================
+// open image from pasted URL
+function readURL() {
+  let urlString = document.getElementById('get-url');
+
+  urlString.addEventListener('submit', function (event) {
+    event.preventDefault();
+    let directURL = document.getElementById('url').value;
+    console.log(directURL);
+    openImgInCanvas(directURL);
+  });
+}
+
+getElement('url').addEventListener('change', readURL, false);

@@ -4,7 +4,7 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-    <title>Pixelizr</title>
+    <title>Algo Art</title>
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' href='css/materialize.min.css'>
     <link rel='stylesheet' href='css/styles.css'>
@@ -16,7 +16,7 @@
           <div class='container'>
             <a href='index.ejs' class='brand-logo center'>
               <i class='material-icons left'>view_module</i>
-              Image Filter Proof of Concept
+              Algo Art Image Filters
             </a>
           </div>
         </div>
@@ -28,10 +28,10 @@
       <div class='row'>
         <div class='col s12 m12'> <!-- holds top row of buttons -->
 
-          <div class='col s12 m6'>
+          <div class='col s6 m4'>
             <form>
               <div class='col s12 m6'>
-                <p class='grey-text'>Browse Flickr</p>
+                <p class='grey-text'>Flickr</p>
                 <button id='browse-btn' class='clr btn-large waves-effect waves-light' type='submit' name='action'>
                   <i class='material-icons right'>search</i>
                   Find
@@ -40,18 +40,26 @@
             </form>
           </div>
 
-          <div class='col s12 m6'>
+          <div class='col s6 m4'>
             <form>
               <div class='file-field input-field'>
-                <p class='grey-text'>Browse File System</p>
+                <p class='grey-text'>File System</p>
                  <div class='clr btn waves-effect waves-light'>
                     <i class='material-icons right'>open_in_browser</i>
                     Open
                     <input type='file' accept='image/*' id='file-upload'>
                  </div>
-                 <!-- <div class='file-path-wrapper'>
-                    <input class='file-path validate' type='text' placeholder='Upload file'>
-                 </div> -->
+              </div>
+            </form>
+          </div>
+
+          <div class='col s12 m4'>
+            <form id='get-url'>
+              <div class='input-field inline'>
+                <p class='grey-text'>Paste URL</p>
+                 <div>
+                    <input type='url' name='url' id='url'>
+                 </div>
               </div>
             </form>
           </div>
@@ -138,9 +146,9 @@
         <div class='row footer-row'>
           <div class='col m6 s12'>
             <h5 class='grey-text text-lighten-4'>
-              <a class='grey-text text-lighten-4' target='_blank' href='https://github.com/bigrobsf/pixelizr/blob/master/README.md'>
+              <a class='grey-text text-lighten-4' target='_blank' href='https://github.com/bigrobsf/poc/blob/master/README.md'>
               <i class='material-icons left'>view_module</i>
-              Image Filter</a>
+              Algo Art</a>
             </h5>
           </div>
           <!-- <a class='grey-text text-lighten-4' target='_blank' href='https://github.com/bigrobsf/pixelizr/blob/master/README.md'> -->
