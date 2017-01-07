@@ -128,7 +128,7 @@ function grayscale() {
 
 //==============================================================================
 // create blurred image for edge detection
-function blurImage() {
+function blurImage(blurRadius = 2, listener = false) {
   let imageObj = document.getElementById('grayCanvas');
 
   let canvas = document.getElementById('blurCanvas');
@@ -139,21 +139,26 @@ function blurImage() {
   canvas.width = imgW;
   canvas.height = imgH;
 
-  let blurStrength = '';
-
-  if (imgW > 600 || imgH > 600) {
-    blurStrength = 'blur(2px)';
-  } else {
-    blurStrength = 'blur(1px)';
-  }
-
-  context.filter = blurStrength;
+  console.log(blurRadius);
+  context.filter = 'blur(' + blurRadius + 'px)';
 
   context.drawImage(imageObj, 0, 0);
+  let rangeInput = document.getElementById('blur-radius');
 
+if (listener === false) {
   document.getElementById('blurCanvas').addEventListener('click', function() {
     window.open(canvas.toDataURL('image/jpeg'), '_blank');
   });
+
+  rangeInput.addEventListener('change', function() {
+    document.getElementById('blur-radius').textContent = rangeInput.value;
+    blurRadius = Number(rangeInput.value);
+
+    blurImage(blurRadius, listener);
+  });
+
+  listener = true;
+}
 
   document.getElementById('dl-blurred').addEventListener('click', function() {
     this.href = canvas.toDataURL('image/jpeg');
@@ -167,8 +172,6 @@ function blurImage() {
 // edge detection main function - creates two canvases, one that is 'layered'
 // and one that is just a plot of the edges
 function edgeDetect(threshold = 10, listener = false) {
-  threshold = threshold < 5 ? 5 : threshold;
-
   let imageObj = document.getElementById('blurCanvas');
 
   let layerCvs = document.getElementById('layerCanvas');
@@ -205,8 +208,7 @@ function edgeDetect(threshold = 10, listener = false) {
 
     rangeInput.addEventListener('change', function() {
       document.getElementById('threshold').textContent = rangeInput.value;
-      threshold = rangeInput.value;
-      console.log(threshold);
+      threshold = Number(rangeInput.value);
 
       edgeDetect(threshold, listener);
     });
@@ -233,7 +235,6 @@ function edgeDetect(threshold = 10, listener = false) {
 //==============================================================================
 // main function for pixelized image
 function pixelize(blockSize = 20, listener = false) {
-  console.log('blockSize function start:', blockSize);
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('pxlCanvas');
@@ -258,7 +259,7 @@ function pixelize(blockSize = 20, listener = false) {
 
     rangeInput.addEventListener('change', function() {
       document.getElementById('block-size').textContent = rangeInput.value;
-      blockSize = rangeInput.value;
+      blockSize = Number(rangeInput.value);
 
       pixelize(blockSize, listener);
     });
@@ -297,7 +298,6 @@ function adjBrightness(adjustment = 30, listener = false) {
       imgPixels.data[i] += adjustment;
       imgPixels.data[i + 1] += adjustment;
       imgPixels.data[i + 2] += adjustment;
-      if (x === 40 && y === 40) console.log(adjustment, imgPixels.data[i], imgPixels.data[i+1], imgPixels.data[i+2]);
     }
   }
 
@@ -312,9 +312,7 @@ function adjBrightness(adjustment = 30, listener = false) {
 
     rangeInput.addEventListener('change', function() {
       document.getElementById('brightness').textContent = rangeInput.value;
-      adjustment = rangeInput.value;
-      adjustment = Number(adjustment);
-      console.log('adjustment: ', adjustment, rangeInput.value);
+      adjustment = Number(rangeInput.value);
 
       adjBrightness(adjustment, listener);
     });

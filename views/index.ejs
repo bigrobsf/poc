@@ -90,6 +90,12 @@
           <p id='show-me' class='b-margin-10'>Blurred Image</p>
           <canvas id='blurCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-blurred' class='img-save' download='blurred.jpg'>Save Image</a>
+
+          <form action='#'>
+            <p class='range-field'>Blur Radius:
+              <input type='range' id='blur-radius' min='1' value='2' max='20' />
+            </p>
+          </form>
         </div>
       </div> <!-- end row -->
 
@@ -99,9 +105,9 @@
           <canvas id='pxlCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-pixelated' class='img-save' download='pixelated.jpg'>Save Image</a>
 
-          <form action="#">
-            <p class="range-field">Block Size:
-              <input type="range" id="block-size" min="10" value='25' max="50" />
+          <form action='#'>
+            <p class='range-field'>Block Size:
+              <input type='range' id='block-size' min='10' value='25' max='50' />
             </p>
           </form>
         </div>
@@ -111,9 +117,9 @@
           <canvas id='brightCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-brightness' class='img-save' download='brightness.jpg'>Save Image</a>
 
-          <form action="#">
-            <p class="range-field">Brightness:
-              <input type="range" id="brightness" min="-150" value='30' max="150" />
+          <form action='#'>
+            <p class='range-field'>Brightness:
+              <input type='range' id='brightness' min='-150' value='30' max='150' />
             </p>
           </form>
 
@@ -130,9 +136,9 @@
           <canvas id='edgeCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-edges' class='img-save' download='edges.jpg'>Save Image</a>
 
-          <form action="#">
-            <p class="range-field">Threshold:
-              <input type="range" id="threshold" min="5" value='10' max="30" />
+          <form action='#'>
+            <p class='range-field'>Threshold:
+              <input type='range' id='threshold' min='5' value='10' max='30' />
             </p>
           </form>
 
