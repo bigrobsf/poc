@@ -98,19 +98,25 @@
           <p id='show-me' class='b-margin-10'>Pixelized Image</p>
           <canvas id='pxlCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-pixelated' class='img-save' download='pixelated.jpg'>Save Image</a>
-          <form id='blocksize-form'>
-            <div>
-              <div class='input-field'>
-                Block Size: <input type='text' placeholder='20' id='block-size' name='block-size'>
-              </div>
-            </div>
+
+          <form action="#">
+            <p class="range-field">Block Size:
+              <input type="range" id="block-size" min="10" value='25' max="50" />
+            </p>
           </form>
         </div>
 
-        <div class='col s12 m6 l3'> <!-- holds the tbd canvas -->
+        <div class='col s12 m6 l3'> <!-- holds the brightness canvas -->
           <p id='show-me' class='b-margin-10'>Adjust Brightness</p>
           <canvas id='brightCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-brightness' class='img-save' download='brightness.jpg'>Save Image</a>
+
+          <!-- <form action="#">
+            <p class="range-field">Brightness:
+              <input type="range" id="brightness" min="-150" value='30' max="150" />
+            </p>
+          </form> -->
+
           <form id='brightness-form'>
             <div>
               <div class='input-field'>
@@ -130,13 +136,19 @@
           <p id='show-me' class='b-margin-10'>Edge Detection</p>
           <canvas id='edgeCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-edges' class='img-save' download='edges.jpg'>Save Image</a>
-          <form id='edge-form'>
+          <!-- <form id='edge-form'>
             <div>
               <div class='input-field'>
                 Threshold: <input type='text' placeholder='10' id='threshold' name='threshold'>
               </div>
             </div>
+          </form> -->
+          <form action="#">
+            <p class="range-field">Threshold:
+              <input type="range" id="threshold" min="5" value='10' max="30" />
+            </p>
           </form>
+
         </div>
       </div> <!-- end row -->
     </main>
@@ -151,8 +163,7 @@
               Algo Art</a>
             </h5>
           </div>
-          <!-- <a class='grey-text text-lighten-4' target='_blank' href='https://github.com/bigrobsf/pixelizr/blob/master/README.md'> -->
-           <!-- About</a> -->
+
           <div class='col m6 push-l2 s12'>
             <p class='grey-text text-lighten-4'>
               Image retrieval courtesy of the

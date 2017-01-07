@@ -217,14 +217,24 @@ function edgeDetect(threshold = 10, listener = false) {
     this.href = edgeCvs.toDataURL('image/png');
   }, false);
 
-  var edgeForm = document.getElementById('edge-form');
-  edgeForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    let threshold = document.getElementById('threshold').value;
-    threshold = Number(threshold);
+  // var edgeForm = document.getElementById('edge-form');
+  // edgeForm.addEventListener('submit', function (event) {
+  //   event.preventDefault();
+  //   let threshold = document.getElementById('threshold').value;
+  //   threshold = Number(threshold);
+  //
+  //   edgeDetect(threshold, listener);
+  // });
+  let rangeInput = document.getElementById('threshold');
+
+  rangeInput.addEventListener('change', function() {
+    document.getElementById('threshold').textContent = rangeInput.value;
+    threshold = rangeInput.value;
+    console.log(threshold);
 
     edgeDetect(threshold, listener);
   });
+
 
   return edgeDetector.edgeCtx.canvas.toDataURL('data/png', 1.0);
 }
@@ -261,12 +271,12 @@ function pixelize(blockSize = 20, listener = false) {
     this.href = canvas.toDataURL('image/jpeg');
   }, false);
 
-  var pxlForm = document.getElementById('blocksize-form');
+  let rangeInput = document.getElementById('block-size');
 
-  pxlForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    let blockSize = document.getElementById('block-size').value;
-    blockSize = Number(blockSize);
+  rangeInput.addEventListener('change', function() {
+    document.getElementById('block-size').textContent = rangeInput.value;
+    blockSize = rangeInput.value;
+    console.log(blockSize);
 
     pixelize(blockSize, listener);
   });
