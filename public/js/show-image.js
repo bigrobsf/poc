@@ -207,6 +207,11 @@ function edgeDetect(threshold = 10, listener = false) {
       window.open(layerCvs.toDataURL('image/jpeg'), '_blank');
     });
 
+    // png encoding to make image viewable in new window
+    document.getElementById('edgeCanvas').addEventListener('click', function() {
+      window.open(edgeCvs.toDataURL('image/png'), '_blank');
+    });
+
     rangeInput.addEventListener('change', function() {
       document.getElementById('threshold').textContent = rangeInput.value;
       threshold = Number(rangeInput.value);
@@ -220,11 +225,6 @@ function edgeDetect(threshold = 10, listener = false) {
   document.getElementById('dl-layered').addEventListener('click', function() {
     this.href = layerCvs.toDataURL('image/jpeg');
   }, false);
-
-  // png encoding to make image viewable in new window
-  document.getElementById('edgeCanvas').addEventListener('click', function() {
-    window.open(edgeCvs.toDataURL('image/png'), '_blank');
-  });
 
   document.getElementById('dl-edges').addEventListener('click', function() {
     this.href = edgeCvs.toDataURL('image/png');
@@ -330,7 +330,7 @@ function adjBrightness(adjustment = 30, listener = false) {
 
 
 //==============================================================================
-// change brightness of image
+// change color channel intensity
 function adjColor(red = 0, green = 0, blue = 0, listener = false) {
   let imageObj = document.getElementById('origCanvas');
 
@@ -349,10 +349,11 @@ function adjColor(red = 0, green = 0, blue = 0, listener = false) {
   for (let y = 0; y < imgPixels.height; y++) {
     for (let x = 0; x < imgPixels.width; x++) {
       let i = (y * 4) * imgPixels.width + x * 4;
-
+      if (x < 40 && y < 40) console.log('before', imgPixels.data[i], imgPixels.data[i + 1], imgPixels.data[i + 2], imgPixels.data[i + 3]);
       imgPixels.data[i] += red;
       imgPixels.data[i + 1] += green;
       imgPixels.data[i + 2] += blue;
+      if (x < 40 && y < 40) console.log('after', imgPixels.data[i], imgPixels.data[i + 1], imgPixels.data[i + 2], imgPixels.data[i + 3]);
     }
   }
 
