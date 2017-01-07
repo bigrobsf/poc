@@ -111,19 +111,12 @@
           <canvas id='brightCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-brightness' class='img-save' download='brightness.jpg'>Save Image</a>
 
-          <!-- <form action="#">
+          <form action="#">
             <p class="range-field">Brightness:
               <input type="range" id="brightness" min="-150" value='30' max="150" />
             </p>
-          </form> -->
-
-          <form id='brightness-form'>
-            <div>
-              <div class='input-field'>
-                Brightness: <input type='text' placeholder='30' id='brightness' name='brightness'>
-              </div>
-            </div>
           </form>
+
         </div>
 
         <div class='col s12 m6 l3'> <!-- holds the grayscale image canvas -->
@@ -136,13 +129,7 @@
           <p id='show-me' class='b-margin-10'>Edge Detection</p>
           <canvas id='edgeCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-edges' class='img-save' download='edges.jpg'>Save Image</a>
-          <!-- <form id='edge-form'>
-            <div>
-              <div class='input-field'>
-                Threshold: <input type='text' placeholder='10' id='threshold' name='threshold'>
-              </div>
-            </div>
-          </form> -->
+
           <form action="#">
             <p class="range-field">Threshold:
               <input type="range" id="threshold" min="5" value='10' max="30" />

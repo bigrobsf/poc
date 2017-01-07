@@ -303,9 +303,20 @@ function adjBrightness(adjustment = 30, listener = false) {
 
   context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
 
+  let rangeInput = document.getElementById('brightness');
+
   if (listener === false) {
     document.getElementById('brightCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+
+    rangeInput.addEventListener('change', function() {
+      document.getElementById('brightness').textContent = rangeInput.value;
+      adjustment = rangeInput.value;
+      adjustment = Number(adjustment);
+      console.log('adjustment: ', adjustment, rangeInput.value);
+
+      adjBrightness(adjustment, listener);
     });
 
     listener = true;
@@ -314,26 +325,6 @@ function adjBrightness(adjustment = 30, listener = false) {
   document.getElementById('dl-brightness').addEventListener('click', function() {
     this.href = canvas.toDataURL('image/jpeg');
   }, false);
-
-  let brightForm = document.getElementById('brightness-form');
-
-  brightForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    let brightness = document.getElementById('brightness').value;
-    brightness = Number(brightness);
-
-    adjBrightness(brightness, listener);
-  });
-
-  // let rangeInput = document.getElementById('brightness');
-  //
-  // rangeInput.addEventListener('change', function() {
-  //   document.getElementById('brightness').textContent = rangeInput.value;
-  //   adjustment = rangeInput.value;
-  //   console.log('adjustment: ', adjustment, rangeInput.value);
-  //
-  //   adjBrightness(adjustment, listener);
-  // });
 
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
