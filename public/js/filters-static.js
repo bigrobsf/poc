@@ -25,6 +25,7 @@ function openImgInCanvas(imageURL) {
     adjAlpha();
     adjColor();
     sepia();
+    contrast();
 
     document.getElementById('origCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');

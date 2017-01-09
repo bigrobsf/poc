@@ -278,8 +278,6 @@ function adjColor(red = 0, green = 0, blue = 0, listener = false) {
 //==============================================================================
 // change transparency of image
 function adjAlpha(alpha = 125, listener = false) {
-  console.log(alpha);
-
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('alphaCanvas');
@@ -334,6 +332,7 @@ function adjAlpha(alpha = 125, listener = false) {
 // adjustable sepia filter
 function sepia(adjustment = 10, listener = false) {
   adjustment /= 100;
+
   let imageObj = document.getElementById('origCanvas');
 
   let canvas = document.getElementById('sepiaCanvas');
@@ -386,6 +385,89 @@ function sepia(adjustment = 10, listener = false) {
   }
 
   document.getElementById('dl-sepia').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
+
+  return context.canvas.toDataURL('data/jpeg', 1.0);
+}
+
+
+//==============================================================================
+// adjustable contrast
+function contrast(adjustment = 10, listener = false) {
+  adjustment = Math.pow((adjustment + 100) / 100, 2);
+  console.log(adjustment);
+
+  let imageObj = document.getElementById('origCanvas');
+
+  let canvas = document.getElementById('contrastCanvas');
+  let context = canvas.getContext('2d');
+
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
+  canvas.width = imgW;
+  canvas.height = imgH;
+
+  context.drawImage(imageObj, 0, 0);
+
+  let imgPixels = context.getImageData(0, 0, imgW, imgH);
+
+  let red = 0;
+  let green = 0;
+  let blue = 0;
+
+  for (let y = 0; y < imgPixels.height; y++) {
+    for (let x = 0; x < imgPixels.width; x++) {
+      let i = (y * 4) * imgPixels.width + x * 4;
+
+      red = imgPixels.data[i];
+      green = imgPixels.data[i + 1];
+      blue = imgPixels.data[i + 2];
+
+      red /= 255;
+      red -= 0.5;
+      red *= adjustment;
+      red += 0.5;
+      red *= 255;
+
+      green /= 255;
+      green -= 0.5;
+      green *= adjustment;
+      green += 0.5;
+      green *= 255;
+
+      blue /= 255;
+      blue -= 0.5;
+      blue *= adjustment;
+      blue += 0.5;
+      blue *= 255;
+
+      imgPixels.data[i] = red;
+      imgPixels.data[i + 1] = green;
+      imgPixels.data[i + 2] = blue;
+    }
+  }
+
+  context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+
+  let rangeInput = document.getElementById('contrast');
+
+  if (listener === false) {
+    document.getElementById('contrastCanvas').addEventListener('click', function() {
+      window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+
+    rangeInput.addEventListener('change', function() {
+      document.getElementById('contrast').textContent = rangeInput.value;
+      adjustment = Number(rangeInput.value);
+
+      contrast(adjustment, listener);
+    });
+
+    listener = true;
+  }
+
+  document.getElementById('dl-contrast').addEventListener('click', function() {
     this.href = canvas.toDataURL('image/jpeg');
   }, false);
 
