@@ -4,7 +4,7 @@
 /* jshint node: true */
 
 //==============================================================================
-// create blurred image for edge detection
+// create blurred image for edge detection.
 function blurImage(blurRadius = 2, listener = false) {
   let imageObj = document.getElementById('grayCanvas');
 
@@ -392,7 +392,7 @@ function sepia(adjustment = 100, listener = false) {
 
 //==============================================================================
 // contrast adjustable by color channel
-function contrast(red = 40, green = 40, blue = 40, listener = false) {
+function adjContrast(red = 40, green = 40, blue = 40, listener = false) {
   let redAdj = Math.pow((red + 100) / 100, 2);
   let greenAdj = Math.pow((green + 100) / 100, 2);
   let blueAdj = Math.pow((blue + 100) / 100, 2);
@@ -459,7 +459,7 @@ function contrast(red = 40, green = 40, blue = 40, listener = false) {
       red = Number(redInput.value);
       console.log('redInput', red);
 
-      contrast(red, green, blue, listener);
+      adjContrast(red, green, blue, listener);
     });
 
     greenInput.addEventListener('change', function() {
@@ -467,7 +467,7 @@ function contrast(red = 40, green = 40, blue = 40, listener = false) {
       green = Number(greenInput.value);
       console.log('greenInput', green);
 
-      contrast(red, green, blue, listener);
+      adjContrast(red, green, blue, listener);
     });
 
     blueInput.addEventListener('change', function() {
@@ -475,13 +475,287 @@ function contrast(red = 40, green = 40, blue = 40, listener = false) {
       blue = Number(blueInput.value);
       console.log('blueInput', blue);
 
-      contrast(red, green, blue, listener);
+      adjContrast(red, green, blue, listener);
     });
 
     listener = true;
   }
 
   document.getElementById('dl-contrast').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
+
+  return context.canvas.toDataURL('data/jpeg', 1.0);
+}
+
+//==============================================================================
+// change saturation by color channel
+function adjSaturation(red = 0, green = 0, blue = 0, listener = false) {
+  let redAdj = red * -0.01;
+  let greenAdj = green * -0.01;
+  let blueAdj = blue * -0.01;
+
+  let imageObj = document.getElementById('origCanvas');
+
+  let canvas = document.getElementById('satCanvas');
+  let context = canvas.getContext('2d');
+
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
+  canvas.width = imgW;
+  canvas.height = imgH;
+
+  context.drawImage(imageObj, 0, 0);
+
+  let imgPixels = context.getImageData(0, 0, imgW, imgH);
+  let max = 0;
+
+  for (let y = 0; y < imgPixels.height; y++) {
+    for (let x = 0; x < imgPixels.width; x++) {
+      let i = (y * 4) * imgPixels.width + x * 4;
+
+      red = imgPixels.data[i];
+      green = imgPixels.data[i + 1];
+      blue = imgPixels.data[i + 2];
+
+      max = Math.max(red, green, blue);
+
+      if (red !== max) red += (max - red) * redAdj;
+      if (green !== max) green += (max - green) * greenAdj;
+      if (blue !== max) blue += (max - blue) * blueAdj;
+
+      imgPixels.data[i] += red;
+      imgPixels.data[i + 1] += green;
+      imgPixels.data[i + 2] += blue;
+    }
+  }
+
+  context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+
+  let redInput = document.getElementById('red-sat');
+  let greenInput = document.getElementById('green-sat');
+  let blueInput = document.getElementById('blue-sat');
+
+  if (listener === false) {
+    document.getElementById('satCanvas').addEventListener('click', function() {
+      window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+
+    redInput.addEventListener('change', function() {
+      document.getElementById('red-sat').textContent = redInput.value;
+      red = Number(redInput.value);
+
+      adjSaturation(red, green, blue, listener);
+    });
+
+    greenInput.addEventListener('change', function() {
+      document.getElementById('green-sat').textContent = greenInput.value;
+      green = Number(greenInput.value);
+
+      adjSaturation(red, green, blue, listener);
+    });
+
+    blueInput.addEventListener('change', function() {
+      document.getElementById('blue-sat').textContent = blueInput.value;
+      blue = Number(blueInput.value);
+
+      adjSaturation(red, green, blue, listener);
+    });
+
+    listener = true;
+  }
+
+  document.getElementById('dl-sat').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
+
+  return context.canvas.toDataURL('data/jpeg', 1.0);
+}
+
+// //==============================================================================
+// // adjust vibrance
+// function vibrance(adjustment = 40, listener = false) {
+//   adjustment *= -1;
+//
+//   let imageObj = document.getElementById('origCanvas');
+//
+//   let canvas = document.getElementById('vibeCanvas');
+//   let context = canvas.getContext('2d');
+//
+//   let imgW = imageObj.width;
+//   let imgH = imageObj.height;
+//   canvas.width = imgW;
+//   canvas.height = imgH;
+//
+//   context.drawImage(imageObj, 0, 0);
+//
+//   let imgPixels = context.getImageData(0, 0, imgW, imgH);
+//   let max = 0;
+//   let average = 0;
+//   let amount = 0;
+//
+//   for (let y = 0; y < imgPixels.height; y++) {
+//     for (let x = 0; x < imgPixels.width; x++) {
+//       let i = (y * 4) * imgPixels.width + x * 4;
+//
+//       red = imgPixels.data[i];
+//       green = imgPixels.data[i + 1];
+//       blue = imgPixels.data[i + 2];
+//
+//       max = Math.max(red, green, blue);
+//       average = (red + green + blue) / 3;
+//       amount = ((Math.abs(max - average) * 2 / 255) * adjustment)/10;
+//       if (x < 40 && y < 40) console.log(max, average, amount);
+//
+//       if (red !== max) red += (max - red) * amount;
+//       if (green !== max) green += (max - green) * amount;
+//       if (blue !== max) blue += (max - blue) * amount;
+//
+//       imgPixels.data[i] += red;
+//       imgPixels.data[i + 1] += green;
+//       imgPixels.data[i + 2] += blue;
+//     }
+//   }
+//
+//   context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+//
+//   let rangeInput = document.getElementById('vibrance');
+//
+//   if (listener === false) {
+//     document.getElementById('vibeCanvas').addEventListener('click', function() {
+//       window.open(canvas.toDataURL('image/jpeg'), '_blank');
+//     });
+//
+//     rangeInput.addEventListener('change', function() {
+//       document.getElementById('vibrance').textContent = rangeInput.value;
+//       adjustment = Number(rangeInput.value);
+//
+//       vibrance(adjustment, listener);
+//     });
+//
+//     listener = true;
+//   }
+//
+//   document.getElementById('dl-vibe').addEventListener('click', function() {
+//     this.href = canvas.toDataURL('image/jpeg');
+//   }, false);
+//
+//   return context.canvas.toDataURL('data/jpeg', 1.0);
+// }
+
+//==============================================================================
+// adjust gamma
+function adjGamma(adjustment = 10, listener = false) {
+  adjustment /= 10;
+
+  let imageObj = document.getElementById('origCanvas');
+
+  let canvas = document.getElementById('gammaCanvas');
+  let context = canvas.getContext('2d');
+
+  let imgW = imageObj.width;
+  let imgH = imageObj.height;
+  canvas.width = imgW;
+  canvas.height = imgH;
+
+  context.drawImage(imageObj, 0, 0);
+
+  let imgPixels = context.getImageData(0, 0, imgW, imgH);
+  let max = 0;
+  let average = 0;
+  let amount = 0;
+
+  for (let y = 0; y < imgPixels.height; y++) {
+    for (let x = 0; x < imgPixels.width; x++) {
+      let i = (y * 4) * imgPixels.width + x * 4;
+
+      red = imgPixels.data[i];
+      green = imgPixels.data[i + 1];
+      blue = imgPixels.data[i + 2];
+
+      red = Math.pow(red / 255, adjustment) * 255;
+      green = Math.pow(green / 255, adjustment) * 255;
+      blue = Math.pow(blue / 255, adjustment) * 255;
+
+      imgPixels.data[i] += red;
+      imgPixels.data[i + 1] += green;
+      imgPixels.data[i + 2] += blue;
+    }
+  }
+
+  context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+
+  let rangeInput = document.getElementById('gamma');
+
+  if (listener === false) {
+    document.getElementById('gammaCanvas').addEventListener('click', function() {
+      window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+
+    rangeInput.addEventListener('change', function() {
+      document.getElementById('gamma').textContent = rangeInput.value;
+      adjustment = Number(rangeInput.value);
+
+      adjGamma(adjustment, listener);
+    });
+
+    listener = true;
+  }
+
+  document.getElementById('dl-gamma').addEventListener('click', function() {
+    this.href = canvas.toDataURL('image/jpeg');
+  }, false);
+
+  return context.canvas.toDataURL('data/jpeg', 1.0);
+}
+
+
+//==============================================================================
+// create fill color
+function fillColor(red = 127, green = 127, blue = 127, listener = false) {
+  let canvas = document.getElementById('fillCanvas');
+  let context = canvas.getContext('2d');
+
+  let imgW = canvas.width;
+  let imgH = canvas.height;
+
+  context.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
+  context.fillRect(0, 0, imgW, imgH);
+
+  let redInput = document.getElementById('red-fill');
+  let greenInput = document.getElementById('green-fill');
+  let blueInput = document.getElementById('blue-fill');
+
+  if (listener === false) {
+    document.getElementById('fillCanvas').addEventListener('click', function() {
+      window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
+
+    redInput.addEventListener('change', function() {
+      document.getElementById('red-fill').textContent = redInput.value;
+      red = Number(redInput.value);
+
+      fillColor(red, green, blue, listener);
+    });
+
+    greenInput.addEventListener('change', function() {
+      document.getElementById('green-fill').textContent = greenInput.value;
+      green = Number(greenInput.value);
+
+      fillColor(red, green, blue, listener);
+    });
+
+    blueInput.addEventListener('change', function() {
+      document.getElementById('blue-fill').textContent = blueInput.value;
+      blue = Number(blueInput.value);
+
+      fillColor(red, green, blue, listener);
+    });
+
+    listener = true;
+  }
+
+  document.getElementById('dl-fill').addEventListener('click', function() {
     this.href = canvas.toDataURL('image/jpeg');
   }, false);
 

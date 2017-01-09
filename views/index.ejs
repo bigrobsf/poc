@@ -145,7 +145,7 @@
         </div>
 
         <div class='col s12 m4'> <!-- color channel canvas -->
-          <p id='show-me' class='b-margin-10'>Color Channel Intensity</p>
+          <p id='show-me' class='b-margin-10'>Color Balance (experimental)</p>
           <canvas id='clrCanvas' class='col s12 m12 no-padding img-select'></canvas>
           <a id='dl-color' class='img-save' download='clrchannel.jpg'>Save Image</a>
 
@@ -194,9 +194,6 @@
           <a id='dl-contrast' class='img-save' download='contrast.jpg'>Save Image</a>
 
           <form action='#'>
-            <!-- <p class='range-field'>Contrast:
-              <input type='range' id='contrast' min='-100' value='40' max='100' />
-            </p> -->
             <p class='range-field'>Red:
               <input type='range' id='red-cont' min='-100' value='40' max='100' />
             </p>
@@ -208,7 +205,71 @@
             </p>
           </form>
         </div>
-      </div>
+      </div> <!-- end row -->
+
+      <div class='row'> <!-- start row -->
+        <div class='col s12 m4'> <!-- gamma -->
+          <p id='show-me' class='b-margin-10'>Gamma (experimental)</p>
+          <canvas id='gammaCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-gamma' class='img-save' download='gamma.jpg'>Save Image</a>
+
+          <form action='#'>
+            <p class='range-field'>Gamma:
+              <input type='range' id='gamma' min='0' value='10' max='50' />
+            </p>
+          </form>
+        </div>
+
+        <div class='col s12 m4'> <!-- holds the saturation canvas -->
+          <p id='show-me' class='b-margin-10'>Saturation (experimental)</p>
+          <canvas id='satCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-sat' class='img-save' download='saturation.jpg'>Save Image</a>
+
+          <form action='#'>
+            <p class='range-field'>Red:
+              <input type='range' id='red-sat' min='-100' value='40' max='100' />
+            </p>
+            <p class='range-field'>Green:
+              <input type='range' id='green-sat' min='-100' value='40' max='100' />
+            </p>
+            <p class='range-field'>Blue:
+              <input type='range' id='blue-sat' min='-100' value='40' max='100' />
+            </p>
+          </form>
+        </div>
+
+        <!-- <div class='col s12 m4'>
+          <p id='show-me' class='b-margin-10'>Vibrance</p>
+          <canvas id='vibeCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-vibe' class='img-save' download='vibrance.jpg'>Save Image</a>
+
+          <form action='#'>
+            <p class='range-field'>Vibrance:
+              <input type='range' id='vibrance' min='-100' value='40' max='100' />
+            </p>
+          </form>
+        </div> -->
+
+
+        <div class='col s12 m4'> <!-- fill color -->
+          <p id='show-me' class='b-margin-10'>Fill Color (experimental)</p>
+          <canvas id='fillCanvas' class='col s12 m12 no-padding img-select'></canvas>
+          <a id='dl-fill' class='img-save' download='fill-colorjpg'>Save Image</a>
+
+          <form action='#'>
+            <p class='range-field'>Red:
+              <input type='range' id='red-fill' min='0' value='127' max='255' />
+            </p>
+            <p class='range-field'>Green:
+              <input type='range' id='green-fill' min='0' value='127' max='255' />
+            </p>
+            <p class='range-field'>Blue:
+              <input type='range' id='blue-fill' min='0' value='127' max='255' />
+            </p>
+          </form>
+        </div>
+
+      </div> <!-- end row -->
     </main>
 
     <footer class='page-footer indigo lighten-1' id='footer'>
