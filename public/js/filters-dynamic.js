@@ -21,17 +21,17 @@ function blurImage(blurRadius = 2, listener = false) {
   context.drawImage(imageObj, 0, 0);
   let rangeInput = document.getElementById('blur-radius');
 
-if (listener === false) {
-  document.getElementById('blurCanvas').addEventListener('click', function() {
-    window.open(canvas.toDataURL('image/jpeg'), '_blank');
-  });
+  if (listener === false) {
+    document.getElementById('blurCanvas').addEventListener('click', function() {
+      window.open(canvas.toDataURL('image/jpeg'), '_blank');
+    });
 
-  rangeInput.addEventListener('change', function() {
-    document.getElementById('blur-radius').textContent = rangeInput.value;
-    blurRadius = Number(rangeInput.value);
+    rangeInput.addEventListener('change', function() {
+      document.getElementById('blur-radius').textContent = rangeInput.value;
+      blurRadius = Number(rangeInput.value);
 
-    blurImage(blurRadius, listener);
-  });
+      blurImage(blurRadius, listener);
+    });
 
   listener = true;
 }
@@ -224,11 +224,10 @@ function adjColor(red = 0, green = 0, blue = 0, listener = false) {
   for (let y = 0; y < imgPixels.height; y++) {
     for (let x = 0; x < imgPixels.width; x++) {
       let i = (y * 4) * imgPixels.width + x * 4;
-      // if (x < 40 && y < 40) console.log('before', imgPixels.data[i], imgPixels.data[i + 1], imgPixels.data[i + 2], imgPixels.data[i + 3]);
+
       imgPixels.data[i] += red;
       imgPixels.data[i + 1] += green;
       imgPixels.data[i + 2] += blue;
-      // if (x < 40 && y < 40) console.log('after', imgPixels.data[i], imgPixels.data[i + 1], imgPixels.data[i + 2], imgPixels.data[i + 3]);
     }
   }
 
@@ -330,7 +329,7 @@ function adjAlpha(alpha = 125, listener = false) {
 
 //==============================================================================
 // adjustable sepia filter
-function sepia(adjustment = 10, listener = false) {
+function sepia(adjustment = 100, listener = false) {
   adjustment /= 100;
 
   let imageObj = document.getElementById('origCanvas');
@@ -391,12 +390,12 @@ function sepia(adjustment = 10, listener = false) {
   return context.canvas.toDataURL('data/jpeg', 1.0);
 }
 
-
 //==============================================================================
-// adjustable contrast
-function contrast(adjustment = 10, listener = false) {
-  adjustment = Math.pow((adjustment + 100) / 100, 2);
-  console.log(adjustment);
+// contrast adjustable by color channel
+function contrast(red = 40, green = 40, blue = 40, listener = false) {
+  let redAdj = Math.pow((red + 100) / 100, 2);
+  let greenAdj = Math.pow((green + 100) / 100, 2);
+  let blueAdj = Math.pow((blue + 100) / 100, 2);
 
   let imageObj = document.getElementById('origCanvas');
 
@@ -412,10 +411,6 @@ function contrast(adjustment = 10, listener = false) {
 
   let imgPixels = context.getImageData(0, 0, imgW, imgH);
 
-  let red = 0;
-  let green = 0;
-  let blue = 0;
-
   for (let y = 0; y < imgPixels.height; y++) {
     for (let x = 0; x < imgPixels.width; x++) {
       let i = (y * 4) * imgPixels.width + x * 4;
@@ -426,19 +421,19 @@ function contrast(adjustment = 10, listener = false) {
 
       red /= 255;
       red -= 0.5;
-      red *= adjustment;
+      red *= redAdj;
       red += 0.5;
       red *= 255;
 
       green /= 255;
       green -= 0.5;
-      green *= adjustment;
+      green *= greenAdj;
       green += 0.5;
       green *= 255;
 
       blue /= 255;
       blue -= 0.5;
-      blue *= adjustment;
+      blue *= blueAdj;
       blue += 0.5;
       blue *= 255;
 
@@ -450,18 +445,37 @@ function contrast(adjustment = 10, listener = false) {
 
   context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
 
-  let rangeInput = document.getElementById('contrast');
+  let redInput = document.getElementById('red-cont');
+  let greenInput = document.getElementById('green-cont');
+  let blueInput = document.getElementById('blue-cont');
 
   if (listener === false) {
     document.getElementById('contrastCanvas').addEventListener('click', function() {
       window.open(canvas.toDataURL('image/jpeg'), '_blank');
     });
 
-    rangeInput.addEventListener('change', function() {
-      document.getElementById('contrast').textContent = rangeInput.value;
-      adjustment = Number(rangeInput.value);
+    redInput.addEventListener('change', function() {
+      document.getElementById('red-cont').textContent = redInput.value;
+      red = Number(redInput.value);
+      console.log('redInput', red);
 
-      contrast(adjustment, listener);
+      contrast(red, green, blue, listener);
+    });
+
+    greenInput.addEventListener('change', function() {
+      document.getElementById('green-cont').textContent = greenInput.value;
+      green = Number(greenInput.value);
+      console.log('greenInput', green);
+
+      contrast(red, green, blue, listener);
+    });
+
+    blueInput.addEventListener('change', function() {
+      document.getElementById('blue-cont').textContent = blueInput.value;
+      blue = Number(blueInput.value);
+      console.log('blueInput', blue);
+
+      contrast(red, green, blue, listener);
     });
 
     listener = true;
