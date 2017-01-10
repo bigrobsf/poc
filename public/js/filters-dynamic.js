@@ -524,6 +524,10 @@ function adjSaturation(red = 0, green = 0, blue = 0, listener = false) {
       if (green !== max) green += (max - green) * greenAdj;
       if (blue !== max) blue += (max - blue) * blueAdj;
 
+      // red += (max - red) * redAdj;
+      // green += (max - green) * greenAdj;
+      // blue += (max - blue) * blueAdj;
+
       imgPixels.data[i] += red;
       imgPixels.data[i + 1] += green;
       imgPixels.data[i + 2] += blue;
@@ -661,9 +665,6 @@ function adjGamma(adjustment = 10, listener = false) {
   context.drawImage(imageObj, 0, 0);
 
   let imgPixels = context.getImageData(0, 0, imgW, imgH);
-  let max = 0;
-  let average = 0;
-  let amount = 0;
 
   for (let y = 0; y < imgPixels.height; y++) {
     for (let x = 0; x < imgPixels.width; x++) {
@@ -673,9 +674,13 @@ function adjGamma(adjustment = 10, listener = false) {
       green = imgPixels.data[i + 1];
       blue = imgPixels.data[i + 2];
 
-      red = Math.pow(red / 255, adjustment) * 255;
-      green = Math.pow(green / 255, adjustment) * 255;
-      blue = Math.pow(blue / 255, adjustment) * 255;
+      // red = Math.pow(red / 255, adjustment) * 255;
+      // green = Math.pow(green / 255, adjustment) * 255;
+      // blue = Math.pow(blue / 255, adjustment) * 255;
+
+      red = Math.pow(red / 255, 1 / adjustment) * 255;
+      green = Math.pow(green / 255, 1 / adjustment) * 255;
+      blue = Math.pow(blue / 255, 1 / adjustment) * 255;
 
       imgPixels.data[i] += red;
       imgPixels.data[i + 1] += green;

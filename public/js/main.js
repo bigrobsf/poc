@@ -53,6 +53,7 @@ function readFileImage() {
 }
 
 function getElement(id) {
+  // console.log(document.getElementById(id));
   return document.getElementById(id);
 }
 
@@ -66,7 +67,7 @@ function readURL() {
   urlString.addEventListener('submit', function (event) {
     event.preventDefault();
     let directURL = document.getElementById('url').value;
-
+    // console.log(directURL);
     openImgInCanvas(directURL);
   });
 }
