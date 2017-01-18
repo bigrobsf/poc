@@ -18,7 +18,7 @@ let EdgeDetector = function(imgPixels, layerCtx, edgeCtx, imgW, imgH, threshold)
 
 // =============================================================================
 // iterates through each pixel to get its intensity, the intensity of the surrounding
-// pixels, and compare them
+// pixels, and compares them
 EdgeDetector.prototype.searchImage = function() {
   let index = 0;
   let pixel = 0;
@@ -31,9 +31,9 @@ EdgeDetector.prototype.searchImage = function() {
   for (let y = 0; y < this.imgH; y++) {
     for (let x = 0; x < this.imgW; x++) {
 
-      // Get this pixel's data - from the blue channel only.
-      // Since this is a B/W photo, all color channels are the same.
-      // For color photos, we would make this work for all channels.
+      // Get this pixel's data from the blue channel only.
+      // We could us any channel as they are all the same for a black and white photo.
+      // For color photos, we would implement this for all channels.
       index = (x + y * this.imgW) * 4;
       pixel = this.imgPixels.data[index + 2];
 

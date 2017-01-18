@@ -518,15 +518,17 @@ function adjSaturation(red = 0, green = 0, blue = 0, listener = false) {
       green = imgPixels.data[i + 1];
       blue = imgPixels.data[i + 2];
 
+      // functions under development
+      // let h, s, l;
+	    // convertRGBToHSL(rval, gval, bval, h, s, l);
+	    // s = s * 2;
+	    // convertHSLToRGB(h,s,l, rval, gval, bval);
+
       max = Math.max(red, green, blue);
 
       if (red !== max) red += (max - red) * redAdj;
       if (green !== max) green += (max - green) * greenAdj;
       if (blue !== max) blue += (max - blue) * blueAdj;
-
-      // red += (max - red) * redAdj;
-      // green += (max - green) * greenAdj;
-      // blue += (max - blue) * blueAdj;
 
       imgPixels.data[i] += red;
       imgPixels.data[i + 1] += green;
