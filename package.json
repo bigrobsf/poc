@@ -10,7 +10,7 @@
     "url": "git@github.com:bigrobsf/poc.git",
     "type": "git"
   },
-  "author": "Rob Conner",
+  "author": "Rob Conner (rjconner@mac.com)",
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.5.5",
