@@ -1,15 +1,20 @@
 {
   "name": "poc",
   "version": "1.0.0",
-  "description": "Proof of concept for Q3 project",
+  "description": "edge detection and filter proof of concept for Q3 project",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Rob Conner",
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.5.5",
     "express": "^4.14.0"
-  }
+  },
+  "engines": {
+    "node": "6.8.1"
+  },
+  "homepage": "https://github.com/bigrobsf/poc"
 }
