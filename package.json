@@ -9,7 +9,7 @@
   "repository": {
     "url": "git@github.com:bigrobsf/poc.git",
     "type": "git"
-},
+  },
   "author": "Rob Conner",
   "license": "ISC",
   "dependencies": {
