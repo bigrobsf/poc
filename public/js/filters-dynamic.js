@@ -205,7 +205,7 @@ function adjBrightness(adjustment = 30, listener = false) {
 
 
 //==============================================================================
-// change color channel intensity
+// change color channel intensity (experimental)
 function adjColor(red = 0, green = 0, blue = 0, listener = false) {
   let imageObj = document.getElementById('origCanvas');
 
@@ -489,7 +489,7 @@ function adjContrast(red = 40, green = 40, blue = 40, listener = false) {
 }
 
 //==============================================================================
-// change saturation by color channel
+// change saturation by color channel (under development)
 function adjSaturation(red = 0, green = 0, blue = 0, listener = false) {
   let redAdj = red * -0.01;
   let greenAdj = green * -0.01;
@@ -650,7 +650,7 @@ function adjSaturation(red = 0, green = 0, blue = 0, listener = false) {
 // }
 
 //==============================================================================
-// adjust gamma
+// adjust gamma (experimental)
 function adjGamma(adjustment = 10, listener = false) {
   adjustment /= 10;
 
