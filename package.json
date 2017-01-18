@@ -4,9 +4,12 @@
   "description": "edge detection and filter proof of concept for Q3 project",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
+  "repository": {
+    "url": "git@github.com:bigrobsf/poc.git",
+    "type": "git"
+},
   "author": "Rob Conner",
   "license": "ISC",
   "dependencies": {
