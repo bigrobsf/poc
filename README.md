@@ -16,3 +16,5 @@ Secondary goals included learning:
 A bonus was learning how to use the HTML input type 'range' to create sliders that change the parameter values of various filters.
 
 A next logical step for this is to build a menu system and implement a basic Photoshop-like web app. This is also on my post-graduation project list.
+
+**Note:** Developed for Chrome desktop. As this is not intended as an end-user app in its current form. For example, there is no spinner to let the user know that the app is working before it displays the various versions of the selected image.
