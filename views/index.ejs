@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Algo Art</title>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-    <link rel='stylesheet' href='css/materialize.min.css'>
-    <link rel='stylesheet' href='css/styles.css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
-    <div class='navbar-fixed'>
-      <nav class='indigo'>
-        <div class='nav-wrapper'>
-          <div class='container'>
-            <a href='index.ejs' class='brand-logo center'>
-              <i class='material-icons left'>view_module</i>
+    <div class="navbar-fixed">
+      <nav class="indigo">
+        <div class="nav-wrapper">
+          <div class="container">
+            <a href="index.ejs" class="brand-logo center">
+              <i class="material-icons left">view_module</i>
               Algo Art Image Filters
             </a>
           </div>
@@ -23,42 +23,42 @@
       </nav>
     </div>
 
-    <main class='container'>
+    <main class="container">
 
-      <div class='row'>
-        <div class='col s12 m12'> <!-- holds top row of buttons -->
+      <div class="row">
+        <div class="col s12 m12"> <!-- holds top row of buttons -->
 
-          <div class='col s6 m4'>
+          <div class="col s6 m4">
             <form>
-              <div class='col s12 m6'>
-                <p class='grey-text'>Flickr</p>
-                <button id='browse-btn' class='clr btn button-dim waves-effect waves-light' type='submit' name='action'>
-                  <i class='material-icons right'>search</i>
+              <div class="col s12 m6">
+                <p class="grey-text">Flickr</p>
+                <button id="browse-btn" class="clr btn button-dim waves-effect waves-light" type="submit" name="action">
+                  <i class="material-icons right">search</i>
                   Find
                 </button>
               </div>
             </form>
           </div>
 
-          <div class='col s6 m4'>
+          <div class="col s6 m4">
             <form>
-              <div class='file-field input-field'>
-                <p class='grey-text'>File System</p>
-                 <div class='clr btn button-dim waves-effect waves-light'>
-                    <i class='material-icons right'>open_in_browser</i>
+              <div class="file-field input-field">
+                <p class="grey-text">File System</p>
+                 <div class="clr btn button-dim waves-effect waves-light">
+                    <i class="material-icons right">open_in_browser</i>
                     Open
-                    <input type='file' accept='image/*' id='file-upload'>
+                    <input type="file" accept="image/*" id="file-upload">
                  </div>
               </div>
             </form>
           </div>
 
-          <div class='col s12 m4'>
-            <form id='get-url'>
-              <div class='input-field inline'>
-                <p class='grey-text'>Paste URL</p>
+          <div class="col s12 m4">
+            <form id="get-url">
+              <div class="input-field inline">
+                <p class="grey-text">Paste URL</p>
                 <div>
-                  <input type='url' name='url' id='url'>
+                  <input type="url" name="url" id="url">
                 </div>
               </div>
             </form>
@@ -67,204 +67,204 @@
         </div>
       </div>
 
-      <div class='row'> <!-- start row -->
-        <div class='col s12 m4'> <!-- holds the original image canvas -->
-          <p id='show-me' class='b-margin-10'>Original Image</p>
-          <canvas id='origCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-original' class='img-save' download='original.jpg'>Save Image</a>
+      <div class="row"> <!-- start row -->
+        <div class="col s12 m4"> <!-- holds the original image canvas -->
+          <p class="b-margin-10">Original Image</p>
+          <canvas id="origCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-original" class="img-save" download="original.jpg">Save Image</a>
         </div>
 
-        <div class='col s12 m4'> <!-- holds the inverted image canvas -->
-          <p id='show-me' class='b-margin-10'>Inverted Image (Negative)</p>
-          <canvas id='invCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-inverted' class='img-save' download='inverted.jpg'>Save Image</a>
+        <div class="col s12 m4"> <!-- holds the inverted image canvas -->
+          <p class="b-margin-10">Inverted Image (Negative)</p>
+          <canvas id="invCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-inverted" class="img-save" download="inverted.jpg">Save Image</a>
         </div>
 
-        <div class='col s12 m4'> <!-- holds the grayscale image canvas -->
-          <p id='show-me' class='b-margin-10'>Grayscaled Image</p>
-          <canvas id='grayCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-grayscale' class='img-save' download='grayscale.jpg'>Save Image</a>
-        </div>
-      </div> <!-- end row -->
-
-      <div class='row'> <!-- start row -->
-        <div class='col s12 m4'> <!-- holds the edge detection canvas -->
-          <p id='show-me' class='b-margin-10'>Blurred Image</p>
-          <canvas id='blurCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-blurred' class='img-save' download='blurred.jpg'>Save Image</a>
-
-          <form action='#'>
-            <p class='range-field'>Blur Radius:
-              <input type='range' id='blur-radius' min='1' value='2' max='20' />
-            </p>
-          </form>
-        </div>
-
-        <div class='col s12 m4'> <!-- holds the pixelized image canvas -->
-          <p id='show-me' class='b-margin-10'>Pixelized Image</p>
-          <canvas id='pxlCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-pixelated' class='img-save' download='pixelated.jpg'>Save Image</a>
-
-          <form action='#'>
-            <p class='range-field'>Block Size:
-              <input type='range' id='block-size' min='10' value='25' max='50' />
-            </p>
-          </form>
-        </div>
-
-        <div class='col s12 m4'> <!-- holds the brightness canvas -->
-          <p id='show-me' class='b-margin-10'>Adjust Brightness</p>
-          <canvas id='brightCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-brightness' class='img-save' download='brightness.jpg'>Save Image</a>
-
-          <form action='#'>
-            <p class='range-field'>Brightness:
-              <input type='range' id='brightness' min='-150' value='30' max='150' />
-            </p>
-          </form>
+        <div class="col s12 m4"> <!-- holds the grayscale image canvas -->
+          <p class="b-margin-10">Grayscaled Image</p>
+          <canvas id="grayCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-grayscale" class="img-save" download="grayscale.jpg">Save Image</a>
         </div>
       </div> <!-- end row -->
 
-      <div class='row'> <!-- start row -->
-        <div class='col s12 m4'> <!-- holds the grayscale image canvas -->
-          <p id='show-me' class='b-margin-10'>Layered Image</p>
-          <canvas id='layerCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-layered' class='img-save' download='layered.jpg'>Save Image</a>
-        </div>
+      <div class="row"> <!-- start row -->
+        <div class="col s12 m4"> <!-- holds the edge detection canvas -->
+          <p class="b-margin-10">Blurred Image</p>
+          <canvas id="blurCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-blurred" class="img-save" download="blurred.jpg">Save Image</a>
 
-        <div class='col s12 m4'> <!-- holds the edge detection canvas -->
-          <p id='show-me' class='b-margin-10'>Edge Detection</p>
-          <canvas id='edgeCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-edges' class='img-save' download='edges.jpg'>Save Image</a>
-
-          <form action='#'>
-            <p class='range-field'>Threshold:
-              <input type='range' id='threshold' min='5' value='10' max='30' />
+          <form action="#">
+            <p class="range-field">Blur Radius:
+              <input type="range" id="blur-radius" min="1" value="2" max="20" />
             </p>
           </form>
         </div>
 
-        <div class='col s12 m4'> <!-- color channel canvas -->
-          <p id='show-me' class='b-margin-10'>Color Balance (experimental)</p>
-          <canvas id='clrCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-color' class='img-save' download='clrchannel.jpg'>Save Image</a>
+        <div class="col s12 m4"> <!-- holds the pixelized image canvas -->
+          <p class="b-margin-10">Pixelized Image</p>
+          <canvas id="pxlCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-pixelated" class="img-save" download="pixelated.jpg">Save Image</a>
 
-          <form action='#'>
-            <p class='range-field'>Red:
-              <input type='range' id='red-adj' min='-255' value='0' max='255' />
+          <form action="#">
+            <p class="range-field">Block Size:
+              <input type="range" id="block-size" min="10" value="25" max="50" />
             </p>
-            <p class='range-field'>Green:
-              <input type='range' id='green-adj' min='-255' value='0' max='255' />
-            </p>
-            <p class='range-field'>Blue:
-              <input type='range' id='blue-adj' min='-255' value='0' max='255' />
+          </form>
+        </div>
+
+        <div class="col s12 m4"> <!-- holds the brightness canvas -->
+          <p class="b-margin-10">Adjust Brightness</p>
+          <canvas id="brightCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-brightness" class="img-save" download="brightness.jpg">Save Image</a>
+
+          <form action="#">
+            <p class="range-field">Brightness:
+              <input type="range" id="brightness" min="-150" value="30" max="150" />
             </p>
           </form>
         </div>
       </div> <!-- end row -->
 
-      <div class='row'> <!-- start row -->
-        <div class='col s12 m4'> <!-- holds the alpha channel canvas -->
-          <p id='show-me' class='b-margin-10'>Alpha Channel</p>
-          <canvas id='alphaCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-alpha' class='img-save' download='alpha.jpg'>Save Image</a>
+      <div class="row"> <!-- start row -->
+        <div class="col s12 m4"> <!-- holds the grayscale image canvas -->
+          <p class="b-margin-10">Layered Image</p>
+          <canvas id="layerCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-layered" class="img-save" download="layered.jpg">Save Image</a>
+        </div>
 
-          <form action='#'>
-            <p class='range-field'>Transparency:
-              <input type='range' id='alpha' min='0' value='125' max='255' />
+        <div class="col s12 m4"> <!-- holds the edge detection canvas -->
+          <p class="b-margin-10">Edge Detection</p>
+          <canvas id="edgeCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-edges" class="img-save" download="edges.jpg">Save Image</a>
+
+          <form action="#">
+            <p class="range-field">Threshold:
+              <input type="range" id="threshold" min="5" value="10" max="30" />
             </p>
           </form>
         </div>
 
-        <div class='col s12 m4'> <!-- sepia -->
-          <p id='show-me' class='b-margin-10'>Sepia</p>
-          <canvas id='sepiaCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-sepia' class='img-save' download='sepia.jpg'>Save Image</a>
+        <div class="col s12 m4"> <!-- color channel canvas -->
+          <p class="b-margin-10">Color Balance (experimental)</p>
+          <canvas id="clrCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-color" class="img-save" download="clrchannel.jpg">Save Image</a>
 
-          <form action='#'>
-            <p class='range-field'>Sepia:
-              <input type='range' id='sepia' min='0' value='100' max='100' />
+          <form action="#">
+            <p class="range-field">Red:
+              <input type="range" id="red-adj" min="-255" value="0" max="255" />
             </p>
-          </form>
-        </div>
-
-        <div class='col s12 m4'> <!-- contrast -->
-          <p id='show-me' class='b-margin-10'>Contrast</p>
-          <canvas id='contrastCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-contrast' class='img-save' download='contrast.jpg'>Save Image</a>
-
-          <form action='#'>
-            <p class='range-field'>Red:
-              <input type='range' id='red-cont' min='-100' value='40' max='100' />
+            <p class="range-field">Green:
+              <input type="range" id="green-adj" min="-255" value="0" max="255" />
             </p>
-            <p class='range-field'>Green:
-              <input type='range' id='green-cont' min='-100' value='40' max='100' />
-            </p>
-            <p class='range-field'>Blue:
-              <input type='range' id='blue-cont' min='-100' value='40' max='100' />
+            <p class="range-field">Blue:
+              <input type="range" id="blue-adj" min="-255" value="0" max="255" />
             </p>
           </form>
         </div>
       </div> <!-- end row -->
 
-      <div class='row'> <!-- start row -->
-        <div class='col s12 m4'> <!-- gamma -->
-          <p id='show-me' class='b-margin-10'>Gamma (experimental)</p>
-          <canvas id='gammaCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-gamma' class='img-save' download='gamma.jpg'>Save Image</a>
+      <div class="row"> <!-- start row -->
+        <div class="col s12 m4"> <!-- holds the alpha channel canvas -->
+          <p class="b-margin-10">Alpha Channel</p>
+          <canvas id="alphaCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-alpha" class="img-save" download="alpha.jpg">Save Image</a>
 
-          <form action='#'>
-            <p class='range-field'>Gamma:
-              <input type='range' id='gamma' min='0' value='10' max='50' />
+          <form action="#">
+            <p class="range-field">Transparency:
+              <input type="range" id="alpha" min="0" value="125" max="255" />
             </p>
           </form>
         </div>
 
-        <div class='col s12 m4'> <!-- holds the saturation canvas -->
-          <p id='show-me' class='b-margin-10'>Saturation (experimental)</p>
-          <canvas id='satCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-sat' class='img-save' download='saturation.jpg'>Save Image</a>
+        <div class="col s12 m4"> <!-- sepia -->
+          <p class="b-margin-10">Sepia</p>
+          <canvas id="sepiaCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-sepia" class="img-save" download="sepia.jpg">Save Image</a>
 
-          <form action='#'>
-            <p class='range-field'>Red:
-              <input type='range' id='red-sat' min='-100' value='40' max='100' />
-            </p>
-            <p class='range-field'>Green:
-              <input type='range' id='green-sat' min='-100' value='40' max='100' />
-            </p>
-            <p class='range-field'>Blue:
-              <input type='range' id='blue-sat' min='-100' value='40' max='100' />
+          <form action="#">
+            <p class="range-field">Sepia:
+              <input type="range" id="sepia" min="0" value="100" max="100" />
             </p>
           </form>
         </div>
 
-        <!-- <div class='col s12 m4'>
-          <p id='show-me' class='b-margin-10'>Vibrance</p>
-          <canvas id='vibeCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-vibe' class='img-save' download='vibrance.jpg'>Save Image</a>
+        <div class="col s12 m4"> <!-- contrast -->
+          <p class="b-margin-10">Contrast</p>
+          <canvas id="contrastCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-contrast" class="img-save" download="contrast.jpg">Save Image</a>
 
-          <form action='#'>
-            <p class='range-field'>Vibrance:
-              <input type='range' id='vibrance' min='-100' value='40' max='100' />
+          <form action="#">
+            <p class="range-field">Red:
+              <input type="range" id="red-cont" min="-100" value="40" max="100" />
+            </p>
+            <p class="range-field">Green:
+              <input type="range" id="green-cont" min="-100" value="40" max="100" />
+            </p>
+            <p class="range-field">Blue:
+              <input type="range" id="blue-cont" min="-100" value="40" max="100" />
+            </p>
+          </form>
+        </div>
+      </div> <!-- end row -->
+
+      <div class="row"> <!-- start row -->
+        <div class="col s12 m4"> <!-- gamma -->
+          <p class="b-margin-10">Gamma (experimental)</p>
+          <canvas id="gammaCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-gamma" class="img-save" download="gamma.jpg">Save Image</a>
+
+          <form action="#">
+            <p class="range-field">Gamma:
+              <input type="range" id="gamma" min="0" value="10" max="50" />
+            </p>
+          </form>
+        </div>
+
+        <div class="col s12 m4"> <!-- holds the saturation canvas -->
+          <p class="b-margin-10">Saturation (experimental)</p>
+          <canvas id="satCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-sat" class="img-save" download="saturation.jpg">Save Image</a>
+
+          <form action="#">
+            <p class="range-field">Red:
+              <input type="range" id="red-sat" min="-100" value="40" max="100" />
+            </p>
+            <p class="range-field">Green:
+              <input type="range" id="green-sat" min="-100" value="40" max="100" />
+            </p>
+            <p class="range-field">Blue:
+              <input type="range" id="blue-sat" min="-100" value="40" max="100" />
+            </p>
+          </form>
+        </div>
+
+        <!-- <div class="col s12 m4">
+          <p class="b-margin-10">Vibrance</p>
+          <canvas id="vibeCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-vibe" class="img-save" download="vibrance.jpg">Save Image</a>
+
+          <form action="#">
+            <p class="range-field">Vibrance:
+              <input type="range" id="vibrance" min="-100" value="40" max="100" />
             </p>
           </form>
         </div> -->
 
 
-        <div class='col s12 m4'> <!-- fill color -->
-          <p id='show-me' class='b-margin-10'>Fill Color (experimental)</p>
-          <canvas id='fillCanvas' class='col s12 m12 no-padding img-select'></canvas>
-          <a id='dl-fill' class='img-save' download='fill-colorjpg'>Save Image</a>
+        <div class="col s12 m4"> <!-- fill color -->
+          <p class="b-margin-10">Fill Color (experimental)</p>
+          <canvas id="fillCanvas" class="col s12 m12 no-padding img-select"></canvas>
+          <a id="dl-fill" class="img-save" download="fill-colorjpg">Save Image</a>
 
-          <form action='#'>
-            <p class='range-field'>Red:
-              <input type='range' id='red-fill' min='0' value='127' max='255' />
+          <form action="#">
+            <p class="range-field">Red:
+              <input type="range" id="red-fill" min="0" value="127" max="255" />
             </p>
-            <p class='range-field'>Green:
-              <input type='range' id='green-fill' min='0' value='127' max='255' />
+            <p class="range-field">Green:
+              <input type="range" id="green-fill" min="0" value="127" max="255" />
             </p>
-            <p class='range-field'>Blue:
-              <input type='range' id='blue-fill' min='0' value='127' max='255' />
+            <p class="range-field">Blue:
+              <input type="range" id="blue-fill" min="0" value="127" max="255" />
             </p>
           </form>
         </div>
@@ -272,21 +272,21 @@
       </div> <!-- end row -->
     </main>
 
-    <footer class='page-footer indigo lighten-1' id='footer'>
-      <div class='container'>
-        <div class='row footer-row'>
-          <div class='col m6 s12'>
-            <h5 class='grey-text text-lighten-4'>
-              <a class='grey-text text-lighten-4' target='_blank' href='https://github.com/bigrobsf/poc/blob/master/README.md'>
-              <i class='material-icons left'>view_module</i>
+    <footer class="page-footer indigo lighten-1" id="footer">
+      <div class="container">
+        <div class="row footer-row">
+          <div class="col m6 s12">
+            <h5 class="grey-text text-lighten-4">
+              <a class="grey-text text-lighten-4" target="_blank" href="https://github.com/bigrobsf/poc/blob/master/README.md">
+              <i class="material-icons left">view_module</i>
               Algo Art</a>
             </h5>
           </div>
 
-          <div class='col m6 push-l2 s12'>
-            <p class='grey-text text-lighten-4'>
+          <div class="col m6 push-l2 s12">
+            <p class="grey-text text-lighten-4">
               Image retrieval courtesy of the
-              <a id='flickr' class='grey-text text-lighten-4' href='https://www.flickr.com/services/api/'>
+              <a id="flickr" class="grey-text text-lighten-4" href="https://www.flickr.com/services/api/">
                 Flickr API
               </a>
             </p>
@@ -294,19 +294,19 @@
         </div>
       </div>
 
-      <div class='footer-copyright indigo darken-1'>
-        <div class='container'>
+      <div class="footer-copyright indigo darken-1">
+        <div class="container">
           © 2017 Rob Conner
         </div>
       </div>
     </footer>
-    <script src='js/jquery-2.2.4.min.js'></script>
-    <script src='js/materialize.min.js'></script>
-    <script src='js/filters-dynamic.js'></script>
-    <script src='js/filters-static.js'></script>
-    <script src='js/edge-detect.js'></script>
-    <script src='js/pixelize.js'></script>
-    <script src='js/do-ajax.js'></script>
-    <script src='js/main.js'></script>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/filters-dynamic.js"></script>
+    <script src="js/filters-static.js"></script>
+    <script src="js/edge-detect.js"></script>
+    <script src="js/pixelize.js"></script>
+    <script src="js/do-ajax.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
